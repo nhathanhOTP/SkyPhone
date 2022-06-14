@@ -19,18 +19,18 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/fonts/icomoon/style.css">
-
+<link
+	href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="/css/owl.carousel.min.css">
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-
 <!-- Style -->
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/modal.css">
 <!--Style phone-->
 <link rel="stylesheet" href="/css/phone.css">
 <link rel="stylesheet" href="/css/footer.css">
-
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <script
@@ -39,6 +39,8 @@
 </head>
 
 <body ng-app="">
+	<!-- Modal -->
+	<jsp:include page="/views/pageUser/modalHistory.jsp" />
 	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close mt-3">
@@ -56,69 +58,9 @@
 		<jsp:include page="/views/layOut/navUser.jsp" />
 		<!-- SideBar for user -->
 		<jsp:include page="/views/layOut/sidebarUser.jsp" />
-		<div class="img-fluid hero"
-			style="background-image: url(https://cdn.tgdd.vn/2022/05/banner/TGDDDesk1920x450-15-op-1920x450-1.png ); margin-top: 80px;">
-			<div class="container banner">
-				<div id="carouselExampleIndicators" class="carousel slide"
-					data-ride="carousel">
-					<div class="carousel-inner ">
-						<div class="carousel-item active">
-							<div class="row">
-								<div class="col-lg-6">
-									<img class="d-block  m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/720-220-720x220-143.png"
-										alt="">
-								</div>
-								<div class="col-lg-6">
-									<img class="d-block m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/720-220-720x220-37.png"
-										alt="">
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="row">
-								<div class="col-lg-6">
-									<img class="d-block  m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/720x220-720x220-5.png"
-										alt="">
-								</div>
-								<div class="col-lg-6">
-									<img class="d-block m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/720-220-720x220-217.png"
-										alt="">
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="row">
-								<div class="col-lg-6">
-									<img class="d-block  m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/sea-aseri-720-220-720x220-8.png"
-										alt="">
-								</div>
-								<div class="col-lg-6">
-									<img class="d-block m-auto w-100"
-										src="https://cdn.tgdd.vn/2022/05/banner/ipxanh-720-220-720x220.png"
-										alt="">
-								</div>
-							</div>
-						</div>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleIndicators"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon text-dark"
-						style="font-size: 10px;" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-		</div>
-
+		<!-- Banner for user -->
+		<jsp:include page="/views/pageUser/banner.jsp" />
+		<!-- Main for user -->
 		<div class="super_container bannerChu">
 			<div class="container-fluid">
 				<div class="row">
@@ -141,19 +83,19 @@
 						</div>
 					</div>
 					<div class="row ml-5 pl-5 ">
+						<!-- Hiển thị sản phẩm -->
 						<c:forEach var="item" items="${items}">
 							<div class="card rounded-0 " style="width: 14rem;">
 								<a href="/item/product/${item.id_dt}" class="text-dark ">
 									<div class="arrow">
 										<img ng-if="${item.gia}<11.990000"
 											src="/images/Label_01-02.png" width="40 " height="40 "
-											class="mulet " alt=" ">
-										<img
+											class="mulet " alt=" "> <img
 											ng-if="${item.gia}>11.990000" src="/images/docquyen.png"
-											width="40 " height="40 " class="mulet " alt=" ">
-										<img
+											width="40 " height="40 " class="mulet " alt=" "> <img
 											width="220px" class="m-auto pt-4 mx-auto d-block "
-											src="/images/phone_images/${item.id_dt}/0.jpg" alt="Card image cap ">
+											src="/images/phone_images/${item.id_dt}/0.jpg"
+											alt="Card image cap ">
 									</div>
 									<div class="card-body titlePro">
 										<p ng-if="${item.tra_gop}>10" class="result-label temp4 ">
@@ -163,7 +105,8 @@
 										</p>
 										<h5 class="card-title font-weight-normal ">${item.ten_dt}</h5>
 										<h6 class="font-weight-bold text-danger ">
-											<fmt:formatNumber type="number" value="${item.gia}"/><sup><u>đ</u></sup>
+											<fmt:formatNumber type="number" value="${item.gia}" />
+											<sup><u>đ</u></sup>
 										</h6>
 										<i class="bi bi-star-fill text-warning "></i> <i
 											class="bi bi-star-fill text-warning "></i> <i
@@ -174,6 +117,7 @@
 								</a>
 							</div>
 						</c:forEach>
+						<!--Kết thúc hiển thị sản phẩm -->
 					</div>
 					<div class="mt-4 watch ">
 						<button class="btn btn-light rounded border continue ">
@@ -183,11 +127,10 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- End main page -->
 		<!-- Footer -->
 		<jsp:include page="/views/layOut/footer.jsp" />
 	</div>
-
 	<script src="/js/jquery-3.3.1.min.js "></script>
 	<script src="/js/popper.min.js "></script>
 	<script src="/js/bootstrap.min.js "></script>

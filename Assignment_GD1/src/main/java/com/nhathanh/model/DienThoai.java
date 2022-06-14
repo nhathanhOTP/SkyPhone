@@ -25,7 +25,7 @@ public class DienThoai {
     private String mo_ta;
     private String bao_hanh;
     private Boolean hoat_dong;
-    private Integer so_luong;
+    private int so_luong;
     @ManyToOne @JoinColumn(name="id_nhan_hang")
     NhanHang nhanHang;
     @OneToMany(mappedBy="dienThoai")

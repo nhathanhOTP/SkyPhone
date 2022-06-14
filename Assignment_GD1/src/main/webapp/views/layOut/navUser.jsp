@@ -30,12 +30,11 @@
 					</button>
 				</form>
 				<ul class="navbar-nav mr-auto ml-5">
-					<li class="nav-item mt-1">
-						<a class="btn btn-light" href="/history/list"
-							style="width: 100px; font-size: 12px; height: 55px;color:black;">
+					<li class="nav-item mt-1"><a class="btn btn-light"
+						data-toggle="modal" data-target="#exampleModalCenter"
+						style="width: 100px; font-size: 12px; height: 55px; color: black;">
 							Lịch sử đơn <br> hàng
-						</a>
-					</li>
+					</a></li>
 					<li class="nav-item ml-3 mt-1">
 						<form action="/skyphone/GioHang">
 							<button formaction="/skyphone/GioHang"

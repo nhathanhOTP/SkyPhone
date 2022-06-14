@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,14 +42,15 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Thêm mới sản phẩm vào SkyPhone</h4>
-									<form class="form-sample">
+									<form:form class="form-sample" action="/dienthoai/create"
+										modelAttribute="phone" method="post">
 										<hr class="pb-4">
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Tên sản phẩm</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" />
+														<form:input path="ten_dt" type="text" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -55,7 +58,7 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Dung lượng</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" />
+														<form:input path="dung_luong" type="text" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -75,13 +78,28 @@
 												</div>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group row">
+													<label class="col-sm-1 col-form-label">Nhãn hàng</label>
+													<div class="col-sm-11" style="padding-left: 65px;">
+														<select class="form-control" style="height: 40px;">
+															<option>Vivo</option>
+															<option>Nokia</option>
+															<option>IPhone</option>
+															<option>Samsung</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
 										<hr class="pb-3">
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Giá sản phẩm</label>
 													<div class="col-sm-9">
-														<input type="number" class="form-control" />
+														<form:input path="gia" type="number" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -89,7 +107,7 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Nhà sản xuất</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" />
+														<form:input path="nha_sx" type="text" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -99,7 +117,7 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Trả góp %</label>
 													<div class="col-sm-9">
-														<input type="number" class="form-control" />
+														<form:input path="tra_gop" type="number" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -107,7 +125,7 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Bảo hành</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" />
+														<form:input path="bao_hanh" type="text" class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -117,16 +135,17 @@
 												<div class="form-group row">
 													<label class="col-sm-1 col-form-label">Mô tả</label>
 													<div class="col-sm-11" style="padding-left: 65px;">
-														<textarea class="form-control" col=10 rows="10"
-															placeholder="Giới thiệu về sản phẩm..."></textarea>
+														<form:textarea path="mo_ta" class="form-control" col=10 rows="10"
+															placeholder="Giới thiệu về sản phẩm..."></form:textarea>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="row">
-											<button class="btn-add">Thêm sản phẩm vào SkyPhone</button>
+											<button class="btn-add" formaction="/dienthoai/create">Thêm
+												sản phẩm vào SkyPhone</button>
 										</div>
-									</form>
+									</form:form>
 								</div>
 							</div>
 						</div>
