@@ -1,5 +1,6 @@
 package com.nhathanh.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class DienThoaiController {
 	public String getDienThoai(Model model, @ModelAttribute("phone") DienThoai phone) {
 		List<NhanHang> nhanHang = daoNh.findAll();
 		model.addAttribute("nhanHangList", nhanHang);
+		model.addAttribute("sanPhamKoHinh", CheckHinh());
 		return "pageAdmin/createProduct";
 	}
 
@@ -75,16 +77,18 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping("/dienthoai/update")
-	public String update1(Model model,DienThoai item, @RequestParam("mota") String moTa, @RequestParam("nhanHang") Integer idNh) {
+	public String update1(Model model, DienThoai item, @RequestParam("mota") String moTa,
+			@RequestParam("nhanHang") Integer idNh) {
 		item.setId_dt(idEdit);
 		item.setMo_ta(moTa);
 		// Id nhãn hàng
 		item.setNhanHangID(daoNh.getOne(idNh));
 		item.setHoat_dong(false);
 		dao.save(item);
-		model.addAttribute("message","Cập nhật "+item.getTen_dt()+" thành công!");
+		model.addAttribute("message", "Cập nhật " + item.getTen_dt() + " thành công!");
 		return "forward:/dienthoai/edit/" + item.getId_dt();
 	}
+
 	// Phân trang sản phẩm ngừng bán bán
 	@RequestMapping("/SkyPhone/update/page")
 	public String paginate2(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -96,4 +100,21 @@ public class DienThoaiController {
 		model.addAttribute("phone", item);
 		return "pageAdmin/updateProduct";
 	}
+
+	// Hàm lấy toàn bộ sản phẩm chưa có hình
+	public List<DienThoai> CheckHinh() {
+		// Lấy ra toàn bộ sản phẩm trong SkyPhone
+		List<DienThoai> ds = dao.findAll();
+		// Kiểm tra xem thư mục này đã tồn tại hay chưa
+		for (int i = 0; i < ds.size(); i++) {
+			// Lấy ra id của điện thoại xem thử thư mục có tồn tại hay chưa
+			// Nếu chưa thì sản phẩm đó sẽ được xét vào danh sách sản phẩm chưa có hình
+			File f = new File("src/main/webapp/images/" + ds.get(i).getId_dt());
+			if (!f.exists()) {
+				ds.remove(i);
+			}
+		}
+		return ds;
+	}
+
 }

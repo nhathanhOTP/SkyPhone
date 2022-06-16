@@ -15,7 +15,7 @@ CREATE TABLE TaiKhoan(
 
 CREATE TABLE NhanHang(
 	[id] [int] PRIMARY KEY IDENTITY NOT NULL,
-	[ten_nhan_hang] [nvarchar](50) NOT NULL
+	[ten_nhan_hang] [nvarchar](100) NOT NULL
 )
 
 CREATE TABLE DienThoai(

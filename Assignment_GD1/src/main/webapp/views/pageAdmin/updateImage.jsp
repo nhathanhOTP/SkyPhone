@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,10 +46,9 @@
 									<hr>
 									<form action="" class="form-sample">
 										<div class="row">
-											<div class="text-left col-lg-7">Sản phẩm IPhone 13 Pro
-												Max</div>
+											<div class="text-left col-lg-7">${dienThoai.ten_dt!=""?dienThoai.ten_dt:'Vui lòng chọn sản phẩm cập nhật'}</div>
 											<div class="text-left col-lg-5">ID Sản phẩm:
-												A972C577-DFB0-064E-1189-0154C99310DAAC12</div>
+												${dienThoai.id_dt!=""?dienThoai.id_dt:'Trang cập nhật ảnh sản phẩm'}</div>
 										</div>
 										<div class="mt-5">
 											<div class="col-lg-12 m-auto text-center img-fluid">
@@ -129,41 +131,22 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>IPhone 13 Pro max gold</td>
-													<td class="text-danger">28,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="update">Cập nhật ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 12 Pro max gold</td>
-													<td class="text-danger">38,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="update">Cập nhật ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 8 Plus</td>
-													<td class="text-danger">20,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="update">Cập nhật ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 7 Plush Pro</td>
-													<td class="text-danger">18,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="update">Cập nhật ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 11 Pro</td>
-													<td class="text-danger">22,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="update">Cập nhật ảnh</button></td>
-												</tr>
+												<c:forEach var="item" items="${sanPham}">
+													<tr>
+														<td>${item.ten_dt}</td>
+														<td class="text-danger"><fmt:formatNumber
+																type="number" value="${item.gia}" /><i
+															class="typcn typcn-arrow-sorted-down"></i></td>
+														<td>${soLuongAnh}</td>
+														<td>
+															<form action="/skyPhone/image/${item.id_dt}"method="post">
+																<button class="update"
+																	formaction="/skyPhone/image/${item.id_dt}"
+																	type="submit">Cập nhật ảnh</button>
+															</form>
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 										<nav aria-label="Page navigation example ">

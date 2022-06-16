@@ -51,7 +51,7 @@
 						<li class="nav-item"><a class="nav-link"
 							href="/dienThoai">Thêm sản phẩm</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/views/pageAdmin/updateImage.jsp">Hình sản phẩm</a></li>
+							href="/skyPhone/image">Hình sản phẩm</a></li>
 					</ul>
 				</div></li>
 			<li class="nav-item">
@@ -66,7 +66,7 @@
 							href="/admin/report">Sản phẩm</a></li>
 					</ul>
 				</div></li>
-			<li class="nav-item"><a class="nav-link" href="/views/pageAdmin/brandProduct.jsp"> <i
+			<li class="nav-item"><a class="nav-link" href="/SkyPhone/pageAdmin/brandProduct"> <i
 					class="typcn typcn-document-text menu-icon"></i> <span
 					class="menu-title">Nhãn hàng</span>
 			</a></li>
