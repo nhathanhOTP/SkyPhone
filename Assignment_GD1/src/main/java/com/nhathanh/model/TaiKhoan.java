@@ -1,19 +1,28 @@
 package com.nhathanh.model;
+
 import lombok.*;
+
+import java.io.Serializable;
+
 import javax.persistence.*;
+@SuppressWarnings("serial")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name="TAIKHOAN")
+@Entity(name = "TAIKHOAN")
 @Table(name = "TAIKHOAN")
-public class TaiKhoan {
-    @Id
-    private String email;
-    private String ho_ten;
-    @Column(unique = true)
-    private String sdt;
-    @Column(unique = true)
-    private String cmnd;
-    private int vai_tro;
-    private String hinh;
+public class TaiKhoan implements Serializable{
+	@Id
+	@Column(name = "email")
+	private String email;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "ho_ten")
+	private String ho_ten;
+	@Column(name = "sdt", unique = true)
+	private String sdt;
+	@Column(name = "cmnd", unique = true)
+	private String cmnd;
+	@Column(name = "vai_tro")
+	private int vai_tro;
+	@Column(name = "hinh")
+	private String hinh;
 }

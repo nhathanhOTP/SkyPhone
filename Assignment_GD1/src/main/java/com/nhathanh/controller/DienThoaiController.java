@@ -1,6 +1,8 @@
 package com.nhathanh.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,60 +11,89 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nhathanh.dao.DienThoaiDAO;
+import com.nhathanh.dao.NhanHangDAO;
 import com.nhathanh.model.DienThoai;
+import com.nhathanh.model.NhanHang;
 
 @Controller
 public class DienThoaiController {
+	// Phần này dùng để chỉnh sửa sản phẩm điện thoại
 	@Autowired
 	DienThoaiDAO dao;
+	@Autowired
+	NhanHangDAO daoNh;
+	String idEdit;
+
 	@RequestMapping("/dienThoai")
-	public String getDienThoai(Model model) {
-//		Optional<Integer> p = Optional.of(0);
-//		Pageable pageable = PageRequest.of(p.orElse(0), 5);
-//		Page<DienThoai> page = dao.findAll(pageable);
-//		model.addAttribute("page", page);
-//		List<DienThoai> cate = dao.findAll();
-//		model.addAttribute("cate", cate);
+	public String getDienThoai(Model model, @ModelAttribute("phone") DienThoai phone) {
+		List<NhanHang> nhanHang = daoNh.findAll();
+		model.addAttribute("nhanHangList", nhanHang);
 		return "pageAdmin/createProduct";
 	}
 
-//	@RequestMapping("/product/edit/{id}")
-//	public String edit1(Model model, @PathVariable("id") Integer id) {
-//		Product item = dao.findById(id).get();
-//		model.addAttribute("item", item);
-//		List<Product> items = dao.findAll();
-//		model.addAttribute("items", items);
-//		idPr = item.getId();
-//		List<Category> cate = daoCate.findAll();
-//		model.addAttribute("cate", cate);
-//		return "product/index";
-//	}
+	@RequestMapping("/dienthoai/edit/{id}")
+	public String edit1(Model model, @PathVariable("id") String id) {
+		// Tìm đến sản phẩm có id trùng với cơ sở dữ liệu
+		DienThoai item = dao.findById(id).get();
+		model.addAttribute("phone", item);
+		idEdit = item.getId_dt();
+		// Đổ lại nhãn hàng lên combobox
+		List<NhanHang> nhanHang = daoNh.findAll();
+		model.addAttribute("nhanHangList", nhanHang);
+		// Hiển thị các sản phâm có thể cập nhật ảnh
+		displayDienThoaiAnh(model);
+		return "pageAdmin/updateProduct";
+	}
+
+	void displayDienThoaiAnh(Model model) {
+		Optional<Integer> p = Optional.of(0);
+		Pageable pageable = PageRequest.of(p.orElse(0), 5);
+		// ----------------------------------------//
+		// Hiển thị sản phẩm ngừng bán có phân trang để cập nhật ảnh
+		Page<DienThoai> ds = dao.listDienThoaiDisplay(false, pageable);
+		model.addAttribute("sanPham", ds);
+	}
+
 //
 	@RequestMapping("/dienthoai/create")
-	public String create1(DienThoai item) {
-		System.out.println(item);
-//		dao.saveDienThoai(item.getTen_dt(),item.getDung_luong(),
-//				item.getMau(),item.getTra_gop(),item.getNha_sx(),item.getGia(),item.getMo_ta(),
-//				item.getBao_hanh(),item.getNhanHang(),item.getSo_luong());
-		return "<h1>Thêm sản phẩm thành công</h1>";
+	public String create1(Model model, DienThoai item, @RequestParam("mota") String moTa,
+			@RequestParam("nhanHang") int idNh) {
+		try {
+			model.addAttribute("message", "Đã thêm mới sản phẩm vào SkyPhone !");
+			dao.saveDienThoai(item.getTen_dt(), item.getDung_luong(), item.getMau(), item.getTra_gop(),
+					item.getNha_sx(), item.getGia(), moTa, item.getBao_hanh(), false, idNh, 1);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "forward:/dienThoai";
 	}
-//
-//	@RequestMapping("/product/update")
-//	public String update1(Product item) {
-//		if (idPr != -1) {
-//			item.setId(idPr);
-//			dao.save(item);
-//		}
-//		System.out.println(item.getId());
-//		return "redirect:/product/edit/" + idPr;
-//	}
-//
-//	@RequestMapping("/product/delete/{id}")
-//	public String create1(@PathVariable("id") Integer id) {
-//		dao.deleteById(id);
-//		return "redirect:/product";
-//	}
+
+	@RequestMapping("/dienthoai/update")
+	public String update1(Model model,DienThoai item, @RequestParam("mota") String moTa, @RequestParam("nhanHang") Integer idNh) {
+		item.setId_dt(idEdit);
+		item.setMo_ta(moTa);
+		// Id nhãn hàng
+		item.setNhanHangID(daoNh.getOne(idNh));
+		item.setHoat_dong(false);
+		dao.save(item);
+		model.addAttribute("message","Cập nhật "+item.getTen_dt()+" thành công!");
+		return "forward:/dienthoai/edit/" + item.getId_dt();
+	}
+	// Phân trang sản phẩm ngừng bán bán
+	@RequestMapping("/SkyPhone/update/page")
+	public String paginate2(Model model, @RequestParam("p") Optional<Integer> p) {
+		Pageable pageable = PageRequest.of(p.orElse(0), 5);
+		Page<DienThoai> ds = dao.listDienThoaiDisplay(false, pageable);
+		model.addAttribute("sanPham", ds);
+		// Đổ lại dữ liệu trên form
+		DienThoai item = dao.findById(idEdit).get();
+		model.addAttribute("phone", item);
+		return "pageAdmin/updateProduct";
+	}
 }

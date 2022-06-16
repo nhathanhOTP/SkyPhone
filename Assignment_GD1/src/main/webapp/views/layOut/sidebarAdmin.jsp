@@ -17,7 +17,7 @@
 							alt="image"> <span class="sidebar-status-indicator"></span>
 					</div>
 					<div class="sidebar-profile-name">
-						<p class="sidebar-name">NhaThanh</p>
+						<p class="sidebar-name">${user.ho_ten}</p>
 						<p class="sidebar-designation">Chào mừng</p>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 				<p class="sidebar-menu-title">Quản lý</p>
 			</li>
 			<li class="nav-item"><a class="nav-link"
-				href="/views/pageAdmin/indexAdmin.jsp"> <i
+				href="/SkyPhone/index"> <i
 					class="typcn typcn-device-desktop menu-icon"></i> <span
 					class="menu-title">Trang chủ <span
 						class="badge badge-primary ml-3">New</span></span>
@@ -49,12 +49,13 @@
 				<div class="collapse" id="ui-basic">
 					<ul class="nav flex-column sub-menu">
 						<li class="nav-item"><a class="nav-link"
-							href="/views/pageAdmin/createProduct.jsp">Thêm sản phẩm</a></li>
+							href="/dienThoai">Thêm sản phẩm</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="/views/pageAdmin/updateImage.jsp">Hình sản phẩm</a></li>
 					</ul>
 				</div></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+			<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse"
 				href="#charts" aria-expanded="false" aria-controls="charts"> <i
 					class='fa fa-bar-chart'></i> <span class="menu-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thống
 						kê</span> <i class="menu-arrow"></i>
@@ -62,7 +63,7 @@
 				<div class="collapse" id="charts">
 					<ul class="nav flex-column sub-menu">
 						<li class="nav-item"><a class="nav-link"
-							href="/views/pageAdmin/report.jsp">Sản phẩm</a></li>
+							href="/admin/report">Sản phẩm</a></li>
 					</ul>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="/views/pageAdmin/brandProduct.jsp"> <i

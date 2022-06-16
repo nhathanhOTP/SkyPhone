@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,17 +75,24 @@
 										<table class="table table-striped">
 											<thead>
 												<tr>
-													<th>Tổng sản phẩm đang bán</th>
-													<th>Tổng sản phẩm tạm ngưng</th>
-													<th>Tống số lượng sản phẩm hiện có</th>
+													<th>Sdt người nhận</th>
+													<th>Tên người nhận</th>
+													<th>Tổng giá</th>
+													<th>Lượt mua</th>
+													<th>Tổng đơn đã mua</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>1000</td>
-													<td>200</td>
-													<td>1200</td>
-												</tr>
+												<c:forEach var="item" items="${report}">
+													<tr>
+														<td>${item.sdtNguoiNhan}</td>
+														<td>${item.tenNguoiNhan}</td>
+														<td><fmt:formatNumber
+																type="number" value="${item.tongGia}"/> </td>
+														<td>${item.luotMua}</td>
+														<td>${item.tongDonDaMua}</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 
@@ -109,24 +119,7 @@
 													<td>13,000,000</td>
 													<td>Thùy Vi</td>
 												</tr>
-												<tr>
-													<td>Quốc Toàn</td>
-													<td>0374768878</td>
-													<td>3,590,000</td>
-													<td>Thùy Vi</td>
-												</tr>
-												<tr>
-													<td>Huy Hoàng</td>
-													<td>0374654563</td>
-													<td>1,000,000</td>
-													<td>Thùy Vi</td>
-												</tr>
-												<tr>
-													<td>Thanh Vi</td>
-													<td>0904657878</td>
-													<td>103,000,000</td>
-													<td>Thùy Vi</td>
-												</tr>
+
 											</tbody>
 										</table>
 										<nav aria-label="Page navigation example ">

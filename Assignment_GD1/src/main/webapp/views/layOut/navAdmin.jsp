@@ -113,14 +113,14 @@
 					class="nav-link dropdown-toggle  pl-0 pr-0" href="#"
 					data-toggle="dropdown" id="profileDropdown"> <i
 						class="typcn typcn-user-outline mr-0"></i> <span
-						class="nav-profile-name">ID: nhabro123</span>
+						class="nav-profile-name">Vai trò: ${user.vai_tro==0?'Quản trị viên':'Nhân viên'}</span>
 				</a>
 					<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 						aria-labelledby="profileDropdown">
 						<a class="dropdown-item"> <i
-							class="typcn typcn-cog text-primary"></i> Settings
-						</a> <a class="dropdown-item"> <i
-							class="typcn typcn-power text-primary"></i> Logout
+							class="typcn typcn-cog text-primary"></i> Cài đặt
+						</a> <a class="dropdown-item" href="/skyPhone/logout"> <i
+							class="typcn typcn-power text-primary"></i> Đăng xuất
 						</a>
 					</div></li>
 			</ul>

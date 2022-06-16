@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,81 +61,36 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td><img
-														src="/images/iphone-13-pro-max-gold-1-200x200.jpg" alt="">
-													</td>
-													<td>IPhone 13 Pro max gold</td>
-													<td>126GB</td>
-													<td>Yellow Gold</td>
-													<td class="text-danger">28,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0 %</td>
-													<td><label class="badge badge-success">Đang
-															bán</label><br>
-														<button class="cancel">Ngừng bán</button></td>
-												</tr>
-												<tr>
-													<td><img src="/images/iphone-13-pro-max-Bac.jpg"
-														alt=""></td>
-													<td>IPhone 13 Pro max white</td>
-													<td>26GB</td>
-													<td>White</td>
-													<td class="text-danger">21.060000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>13 %</td>
-													<td><label class="badge badge-success">Đang
-															bán</label><br>
-														<button class="cancel">Ngừng bán</button></td>
-												</tr>
-												<tr>
-													<td><img src="/images/iphone-13-pro-maxXanhDuong.jpg"
-														alt=""></td>
-													<td>IPhone 13 Pro max blue</td>
-													<td>32GB</td>
-													<td>Blue</td>
-													<td class="text-danger">35.000000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>12 %</td>
-													<td><label class="badge badge-success">Đang
-															bán</label> <br>
-														<button class="cancel">Ngừng bán</button></td>
-												</tr>
-												<tr>
-													<td><img src="/images/iphone-13-pro-maxXam.jpg" alt="">
-													</td>
-													<td>IPhone 13 Pro max gray</td>
-													<td>256GB</td>
-													<td>Gray</td>
-													<td class="text-success">82.000000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>10 %</td>
-													<td><label class="badge badge-success">Đang
-															bán</label><br>
-														<button class="cancel">Ngừng bán</button></td>
-												</tr>
-												<tr>
-													<td><img src="/images/iphone-13-promax-1020x570.jpg"
-														alt=""></td>
-													<td>IPhone 13 Pro max version limit</td>
-													<td>64GB</td>
-													<td>Blue sky</td>
-													<td class="text-success">98.050000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>10 %</td>
-													<td><label class="badge badge-success">Đang
-															bán</label><br>
-														<button class="cancel">Ngừng bán</button></td>
-												</tr>
+												<c:forEach var="item" items="${itemAc.content}">
+													<tr>
+														<td><img
+															src="/images/iphone-13-pro-max-gold-1-200x200.jpg" alt="">
+														</td>
+														<td>${item.ten_dt}</td>
+														<td>${item.dung_luong}</td>
+														<td>${item.mau}</td>
+														<td class="text-danger"><fmt:formatNumber
+																type="number" value="${item.gia}" /><i
+															class="typcn typcn-arrow-sorted-down"></i></td>
+														<td>${item.tra_gop}%</td>
+														<td><label class="badge badge-success">Đang
+																bán</label><br>
+															<button class="cancel">Ngừng bán</button></td>
+													</tr>
+												</c:forEach>
+
 											</tbody>
 										</table>
 										<nav aria-label="Page navigation example">
-											<ul class="pagination mt-3">
-												<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">Next</a></li>
+											<ul class="pagination pagination-sm mt-3">
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page1?p=0">First</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page1?p=${itemAc.number-1 <= 0?0:itemAc.number-1}">Previous</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page1?p=${itemAc.number+1 >= itemAc.totalPages-1?itemAc.totalPages-1:itemAc.number+1}">Next</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page1?p=${itemAc.totalPages-1}">Last</a></li>
 											</ul>
 										</nav>
 									</div>
@@ -166,73 +124,35 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td><a href="/views/pageAdmin/updateProduct.jsp"><img
-															src="/images/iphone-13-pro-max-gold-1-200x200.jpg" alt=""></a>
-													</td>
-													<td>IPhone 13 Pro max gold</td>
-													<td>126GB</td>
-													<td>Yellow Gold</td>
-													<td class="text-danger">28,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0 %</td>
-													<td><button class="add">Thêm vào</button></td>
-												</tr>
-												<tr>
-													<td><a href=""><img
-															src="/images/iphone-13-pro-max-Bac.jpg" alt=""></a></td>
-													<td>IPhone 13 Pro max white</td>
-													<td>26GB</td>
-													<td>White</td>
-													<td class="text-danger">21.060000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>13 %</td>
-													<td><button class="add">Thêm vào</button></td>
-												</tr>
-												<tr>
-													<td><a href=""><img
-															src="/images/iphone-13-pro-maxXanhDuong.jpg" alt=""></a>
-													</td>
-													<td>IPhone 13 Pro max blue</td>
-													<td>32GB</td>
-													<td>Blue</td>
-													<td class="text-danger">35.000000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>12 %</td>
-													<td><button class="add">Thêm vào</button></td>
-												</tr>
-												<tr>
-													<td><a href=""><img
-															src="/images/iphone-13-pro-maxXam.jpg" alt=""></a></td>
-													<td>IPhone 13 Pro max gray</td>
-													<td>256GB</td>
-													<td>Gray</td>
-													<td class="text-success">82.000000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>10 %</td>
-													<td><button class="add">Thêm vào</button></td>
-												</tr>
-												<tr>
-													<td><a href=""><img
-															src="/images/iphone-13-promax-1020x570.jpg" alt=""></a>
-													</td>
-													<td>IPhone 13 Pro max version limit</td>
-													<td>64GB</td>
-													<td>Blue sky</td>
-													<td class="text-success">98.050000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>10 %</td>
-													<td><button class="add">Thêm vào</button></td>
-												</tr>
+												<c:forEach var="item" items="${itemUnActive.content}">
+													<tr>
+														<td><a href="/dienthoai/edit/${item.id_dt}"><img
+																src="/images/iphone-13-pro-max-gold-1-200x200.jpg"
+																alt=""></a></td>
+														<td>${item.ten_dt}</td>
+														<td>${item.dung_luong}</td>
+														<td>${item.mau}</td>
+														<td class="text-danger"><fmt:formatNumber
+																type="number" value="${item.gia}" /><i
+															class="typcn typcn-arrow-sorted-down"></i></td>
+														<td>${item.tra_gop}%</td>
+														<td><button class="add">Thêm vào</button> <br>
+															<a class="cancel badge badge-primary" href="/dienthoai/edit/${item.id_dt}">Chỉnh
+																sửa</a></td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 										<nav aria-label="Page navigation example">
-											<ul class="pagination mt-3">
-												<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">Next</a></li>
+											<ul class="pagination pagination-sm mt-3">
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page2?p=0">First</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page2?p=${itemUnActive.number-1 <= 0?0:itemUnActive.number-1}">Previous</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page2?p=${itemUnActive.number+1 >= itemUnActive.totalPages-1?itemUnActive.totalPages-1:itemUnActive.number+1}">Next</a></li>
+												<li class="page-item"><a class="page-link"
+													href="/SkyPhone/page2?p=${itemUnActive.totalPages-1}">Last</a></li>
 											</ul>
 										</nav>
 									</div>

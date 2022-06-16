@@ -5,6 +5,7 @@ go
 
 CREATE TABLE TaiKhoan(
 	[email] [varchar](20) PRIMARY KEY NOT NULL,
+	[password][varchar](35) NOT NULL,
 	[ho_ten] [nvarchar](20) NOT NULL,
 	[sdt] [varchar](11) NOT NULL UNIQUE,
 	[cmnd] [varchar](12) NOT NULL UNIQUE,

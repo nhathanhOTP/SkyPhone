@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>	
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +26,11 @@
 </head>
 
 <body>
+	<script>
+		if ("${message}" != "") {
+			alert("${message}")
+		}
+	</script>
 	<div class="container-scroller">
 		<!-- Nav -->
 		<jsp:include page="/views/layOut/navAdmin.jsp" />
@@ -58,37 +64,31 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Dung lượng</label>
 													<div class="col-sm-9">
-														<form:input path="dung_luong" type="text" class="form-control" />
+														<form:input path="dung_luong" type="text"
+															class="form-control" />
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-md-12">
+											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-1 col-form-label">Màu</label>
-													<div class="col-sm-11" style="padding-left: 65px;">
-														<select class="form-control" style="height: 40px;">
-															<option>Blue</option>
-															<option>Red</option>
-															<option>Gray</option>
-															<option>White</option>
-														</select>
+													<label class="col-sm-3 col-form-label">Màu</label>
+													<div class="col-sm-9">
+														<form:input path="mau" type="text" class="form-control" />
 													</div>
 												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
+											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-1 col-form-label">Nhãn hàng</label>
-													<div class="col-sm-11" style="padding-left: 65px;">
-														<select class="form-control" style="height: 40px;">
-															<option>Vivo</option>
-															<option>Nokia</option>
-															<option>IPhone</option>
-															<option>Samsung</option>
-														</select>
+													<label class="col-sm-3 col-form-label">Nhãn hàng</label>
+													<div class="col-sm-9">
+														<form:select path="" id="" class="form-control"
+															style="height: 40px;" name="nhanHang">
+															<c:forEach var="item" items="${nhanHangList}">
+																<option value="${item.id}">${item.ten_nhan_hang}</option>
+															</c:forEach>
+														</form:select>
 													</div>
 												</div>
 											</div>
@@ -117,7 +117,8 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Trả góp %</label>
 													<div class="col-sm-9">
-														<form:input path="tra_gop" type="number" class="form-control" />
+														<form:input path="tra_gop" type="number"
+															class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -125,7 +126,8 @@
 												<div class="form-group row">
 													<label class="col-sm-3 col-form-label">Bảo hành</label>
 													<div class="col-sm-9">
-														<form:input path="bao_hanh" type="text" class="form-control" />
+														<form:input path="bao_hanh" type="text"
+															class="form-control" />
 													</div>
 												</div>
 											</div>
@@ -135,8 +137,8 @@
 												<div class="form-group row">
 													<label class="col-sm-1 col-form-label">Mô tả</label>
 													<div class="col-sm-11" style="padding-left: 65px;">
-														<form:textarea path="mo_ta" class="form-control" col=10 rows="10"
-															placeholder="Giới thiệu về sản phẩm..."></form:textarea>
+														<textarea name="mota" class="form-control" col=10
+															rows="10" placeholder="Giới thiệu về sản phẩm..."></textarea>
 													</div>
 												</div>
 											</div>

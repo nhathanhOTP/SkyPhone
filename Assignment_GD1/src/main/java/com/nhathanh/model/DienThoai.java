@@ -7,6 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +28,7 @@ public class DienThoai {
     private Boolean hoat_dong;
     private int so_luong;
     @ManyToOne @JoinColumn(name="id_nhan_hang")
-    NhanHang nhanHang;
+    NhanHang nhanHangID;
     @OneToMany(mappedBy="dienThoai")
     private List<HDChiTiet> hDChiTiet;
     @OneToMany(mappedBy="dienThoai")
