@@ -64,7 +64,7 @@
 												<c:forEach var="item" items="${itemAc.content}">
 													<tr>
 														<td><img
-															src="/images/iphone-13-pro-max-gold-1-200x200.jpg" alt="">
+															src="/images/phone_images/${item.id_dt}/0.jpg" alt="">
 														</td>
 														<td>${item.ten_dt}</td>
 														<td>${item.dung_luong}</td>
@@ -75,7 +75,11 @@
 														<td>${item.tra_gop}%</td>
 														<td><label class="badge badge-success">Đang
 																bán</label><br>
-															<button class="cancel">Ngừng bán</button></td>
+															<form action="/skyPhone/admin/stop/${item.id_dt}"method="post">
+																<button class="cancel"
+																	formaction="/skyPhone/admin/stop/${item.id_dt}"
+																	type="submit">Ngừng bán</button>
+															</form></td>
 													</tr>
 												</c:forEach>
 
@@ -136,9 +140,14 @@
 																type="number" value="${item.gia}" /><i
 															class="typcn typcn-arrow-sorted-down"></i></td>
 														<td>${item.tra_gop}%</td>
-														<td><button class="add">Thêm vào</button> <br>
-															<a class="cancel badge badge-primary" href="/dienthoai/edit/${item.id_dt}">Chỉnh
-																sửa</a></td>
+														<td>
+															<form action="/skyPhone/admin/continue/${item.id_dt}" method="post">
+																<button class="add"
+																	formaction="/skyPhone/admin/continue/${item.id_dt}"
+																	type="submit">Thêm vào</button>
+															</form><a class="cancel badge badge-primary"
+															href="/dienthoai/edit/${item.id_dt}">Chỉnh sửa</a>
+														</td>
 													</tr>
 												</c:forEach>
 											</tbody>

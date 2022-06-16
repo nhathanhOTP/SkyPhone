@@ -12,7 +12,7 @@ public class AuthInterConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(auth).addPathPatterns("/skyPhoneAdmin","/skyPhoneEmploy","/skyPhoneAdmin/**","/skyPhoneEmploy/**")
+		registry.addInterceptor(auth).addPathPatterns("/SkyPhone/**","/skyPhoneAdmin","/skyPhoneEmploy","/skyPhoneAdmin/**","/skyPhoneEmploy/**")
 				.excludePathPatterns("/login");
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,11 +39,11 @@ public class DisplayDienThoaiController {
 	public String paginate1(Model model, @RequestParam("p") Optional<Integer> p) {
 		Optional<Integer> defaultDisplay = Optional.of(0);
 		Pageable pagedefaultDisplay = PageRequest.of(defaultDisplay.orElse(0), 5);
-		//-------------------//
+		// -------------------//
 		Pageable pageable = PageRequest.of(p.orElse(0), 5);
 		Page<DienThoai> dsDangBan = dao.listDienThoaiDisplay(true, pageable);
 		model.addAttribute("itemAc", dsDangBan);
-		//Hiển thị lại sản phẩm ngừng bán
+		// Hiển thị lại sản phẩm ngừng bán
 		Page<DienThoai> dsNgungBan = dao.listDienThoaiDisplay(false, pagedefaultDisplay);
 		model.addAttribute("itemUnActive", dsNgungBan);
 		return "pageAdmin/indexAdmin";
@@ -53,7 +54,7 @@ public class DisplayDienThoaiController {
 	public String paginate2(Model model, @RequestParam("p") Optional<Integer> p) {
 		Optional<Integer> defaultDisplay = Optional.of(0);
 		Pageable pagedefaultDisplay = PageRequest.of(defaultDisplay.orElse(0), 5);
-		//-------------------//
+		// -------------------//
 		Pageable pageable = PageRequest.of(p.orElse(0), 5);
 		Page<DienThoai> dsNgungBan = dao.listDienThoaiDisplay(false, pageable);
 		model.addAttribute("itemUnActive", dsNgungBan);
@@ -61,5 +62,22 @@ public class DisplayDienThoaiController {
 		Page<DienThoai> dsDangBan = dao.listDienThoaiDisplay(true, pagedefaultDisplay);
 		model.addAttribute("itemAc", dsDangBan);
 		return "pageAdmin/indexAdmin";
+	}
+
+	// Ngừng bán điện thoại từ SkyPhone
+	@RequestMapping("/skyPhone/admin/stop/{id}")
+	public String stopPhone(@PathVariable("id")String id) {
+		DienThoai dt = dao.findById(id).get(); 
+		dt.setHoat_dong(false);
+		dao.save(dt);
+		return "redirect:/SkyPhone/index";
+	}
+	//Thêm vào điện thoại từ SkyPhone
+	@RequestMapping("/skyPhone/admin/continue/{id}")
+	public String continuePhone(@PathVariable("id")String id) {
+		DienThoai dt = dao.findById(id).get(); 
+		dt.setHoat_dong(true); 
+		dao.save(dt);
+		return "redirect:/SkyPhone/index";
 	}
 }
