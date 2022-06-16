@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <!DOCTYPE html>
 <html lang="en">
 
@@ -45,13 +47,13 @@
             </div>
         </nav>
         <form class="category" onmouseover="showCategory(this)" onmouseout="closeCategory(this)">
-            <a href="/views/pageEmploy/staff_main.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy" class="categoryItem">
                 <i class="bi bi-house"></i> &ensp; Trang chủ
             </a>
-            <a href="/views/pageEmploy/staff_order.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/order" class="categoryItem">
                 <i class="bi bi-box-seam"></i> &ensp; Đơn hàng
             </a>
-            <a href="/views/pageEmploy/staff_comment.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/comment" class="categoryItem">
                 <i class="bi bi-filter-square"></i> &ensp; Đánh giá
             </a>
         </form>
@@ -70,52 +72,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr formaction="staff_comment">
-                                    <td>Võ Thanh Nhã</td>
-                                    <td class="waiting">Đợi xét duyệt</td>
-                                    <td>29/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_wating.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
-                                <tr formaction="staff_comment">
-                                    <td>Võ Thanh Nhã</td>
-                                    <td class="waiting">Đợi xét duyệt</td>
-                                    <td>29/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_wating.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
-                                <tr formaction="staff_comment">
-                                    <td>Võ Thanh Nhã</td>
-                                    <td class="waiting">Đợi xét duyệt</td>
-                                    <td>30/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_wating.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
+                                <c:forEach var="item" items="${notDoneOrder.content}">
                                 <tr>
-                                    <td>Nguyễn Ngọc Thái Duy</td>
-                                    <td class="processing">Đợi đóng gói và xử lý/Chờ giao đơn</td>
-                                    <td>28/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_processing.jsp"><i
+                                    <td>${item.ten_nguoi_nhan}</td>
+                                    <td class="${item.tinh_trang == 0? 'waiting':item.tinh_trang == 1? 'processing':'handled'}">${item.tinh_trang == 0? 'Đợi xét duyệt':item.tinh_trang == 1? 'Đợi đóng gói và xử lý/Chờ giao đơn':'Đã bàn giao cho đơn vị vận chuyển'}</td>
+                                    <td><fmt:formatDate value="${item.ngay_tao_don}" pattern="dd-MM-yyyy"/></td>
+                                    <td><button class="tableButton" formaction="/skyPhoneEmploy/order/${item.id_hd}"><i
                                                 class="fa fa-edit"></i>&ensp;Truy
                                             cập</button></td>
                                 </tr>
-                                <tr>
-                                    <td>Nguyễn Ngọc Thái Duy</td>
-                                    <td class="processing">Đợi đóng gói và xử lý/Chờ giao đơn</td>
-                                    <td>28/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_processing.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                         <div class="centerText row">
-                            <button disabled class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
+                            <button ${notDoneOrder.number == 0? 'disabled':''} formaction="/skyPhoneEmploy/order?page${doneOrder.number}_${notDoneOrder.number-1}" disabled class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
                                     class="fa fa-caret-left" style="font-size:30px;"></i></button>
-                            <button class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
+                            <button ${notDoneOrder.number >= (notDoneOrder.totalPages-1)? 'disabled':''} formaction="/skyPhoneEmploy/order?page${doneOrder.number}_${notDoneOrder.number+1}" class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
                                     class="fa fa-caret-right" style="font-size:30px;"></i></button>
                         </div>
                     </div>
@@ -133,52 +105,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="item" items="${doneOrder.content}">
                                 <tr>
-                                    <td>Lê Trần Hoàng Huy</td>
-                                    <td class="handled">Đã bàn giao cho vận chuyển</td>
-                                    <td>25/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_done.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
+                                    <td>${item.ten_nguoi_nhan}</td>
+                                    <td class="${item.tinh_trang == 0? 'waiting':item.tinh_trang == 1? 'processing':'handled'}">${item.tinh_trang == 0? 'Đợi xét duyệt':item.tinh_trang == 1? 'Đợi đóng gói và xử lý/Chờ giao đơn':'Đã bàn giao cho đơn vị vận chuyển'}</td>
+                                    <td><fmt:formatDate value="${item.ngay_tao_don}" pattern="dd-MM-yyyy"/></td>
+                                    <td><button class="tableButton" formaction="/skyPhoneEmploy/order/${item.id_hd}"><i
+                                            class="fa fa-edit"></i>&ensp;Truy
+                                        cập</button></td>
                                 </tr>
-                                <tr>
-                                    <td>Lê Quốc Toàn</td>
-                                    <td class="handled">Đã bàn giao cho vận chuyển</td>
-                                    <td>25/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_done.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Nguyễn Ngọc Thanh Vy</td>
-                                    <td class="handled">Đã bàn giao cho vận chuyển</td>
-                                    <td>25/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_done.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Nguyễn Ngọc Thanh Vy</td>
-                                    <td class="handled">Đã bàn giao cho vận chuyển</td>
-                                    <td>25/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_done.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Nguyễn Ngọc Thanh Vy</td>
-                                    <td class="handled">Đã bàn giao cho vận chuyển</td>
-                                    <td>24/5/2022</td>
-                                    <td><button class="tableButton" formaction="/views/pageEmploy/staff_order_done.jsp"><i
-                                                class="fa fa-edit"></i>&ensp;Truy
-                                            cập</button></td>
-                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                         <div class="centerText row">
-                            <button disabled class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
+                            <button ${doneOrder.number == 0? 'disabled':''} formaction="/skyPhoneEmploy/order?page${doneOrder.number-1}_${notDoneOrder.number}" class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
                                     class="fa fa-caret-left" style="font-size:30px;"></i></button>
-                            <button class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
+                            <button ${doneOrder.number >= (doneOrder.totalPages-1)? 'disabled':''} formaction="/skyPhoneEmploy/order?page${doneOrder.number+1}_${notDoneOrder.number}" class="col-lg-1 col-sm-12 m-lg-auto mb-sm-2" style="border-radius:7px;"><i
                                     class="fa fa-caret-right" style="font-size:30px;"></i></button>
                         </div>
                     </div>

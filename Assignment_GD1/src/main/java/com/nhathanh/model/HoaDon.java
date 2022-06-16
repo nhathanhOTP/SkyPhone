@@ -12,7 +12,7 @@ import java.util.List;
 @Entity(name = "HOADON")
 @Table(name = "HOADON")
 public class HoaDon {
-    @Id
+	@Id
     private String id_hd;
     private String nguoi_thanh_toan;
     private int so_luong_don;
@@ -20,8 +20,8 @@ public class HoaDon {
     private String dia_chi_gui;
     private String ten_nguoi_nhan;
     private String sdt_nguoi_nhan;
-    private String dia_nguoi_nhan;
-    private Date nguoi_tao_don;
+    private String dia_chi_nhan;
+    private Date ngay_tao_don;
     private int tinh_trang;
     @OneToMany(mappedBy = "hoaDon")
     private List<HDChiTiet> hDChiTiet;

@@ -1,3 +1,5 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <!DOCTYPE html>
@@ -18,9 +20,26 @@
     <link href="/staff/orderStyle.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/staff/script.js"></script>
-</head>
+    <script>
+        var myTime;
+        function start(){
+            myTime = setInterval('count()', 1000);
+        }
+        function count(){
+            var id = parseInt(document.getElementById('countID').innerHTML);
+            id = id - 1;
+            document.getElementById('countID').innerHTML = id;
+            if(id === 0){
+                document.getElementById('confirmButton').disabled = false;
+                document.getElementById('confirmButton').style.backgroundColor = 'green';
+                document.getElementById('countID').innerHTML = '';
+                clearInterval(myTime);
+            }
+        }
 
-<body>
+    </script>
+</head>
+<body onLoad="start()">
     <div class="staffContainer">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand text-light" href="#">SKYPHONE</a>
@@ -45,13 +64,13 @@
             </div>
         </nav>
         <form class="category" onmouseover="showCategory(this)" onmouseout="closeCategory(this)">
-            <a href="/views/pageEmploy/staff_main.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy" class="categoryItem">
                 <i class="bi bi-house"></i> &ensp; Trang chủ
             </a>
-            <a href="/views/pageEmploy/staff_order.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/order" class="categoryItem">
                 <i class="bi bi-box-seam"></i> &ensp; Đơn hàng
             </a>
-            <a href="/views/pageEmploy/staff_comment.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/comment" class="categoryItem">
                 <i class="bi bi-filter-square"></i> &ensp; Đánh giá
             </a>
         </form>
@@ -80,9 +99,9 @@
                     </div>
                 </div>
                 <div class="orderProcessingContent col-lg-12 p-0 m-0 mb-5 centerComponent">
-                    <button formaction="/views/pageEmploy/staff_order_done.jsp" class="doneButton w-100"><i
+                    <button disabled id="confirmButton" formmethod="post" formaction="/skyPhoneEmploy/order/accept/${HoaDon.id_hd}" style="background-color:gray" class="doneButton w-100"><i
                             class="fa fa-check"></i>&nbsp;Đã bàn giao bưu kiện và hoàn
-                        thành</button>
+                        thành <span id="countID" class="text-light">30</span></button>
                 </div>
             </form>
             <form class="orderProcessingContent row col-lg-7 col-sm-12 p-0 m-auto">
@@ -90,9 +109,9 @@
                 <div class="orderCustomerInfor col-12 row p-2 m-0">
                     <div class="col-12 font-weight-bold">Thông tin khách hàng</div>
                     <div class="customerInfor col-12 row m-0">
-                        <div class="col-12">Nguyễn Ngọc Thái Duy</div>
-                        <div class="col-12">0912571469</div>
-                        <div class="col-12">Lô 24, Toà nhà Innovation, CVPM Quang Trung, P.Tân Chánh Hiệp, Quận 12, TP.HCM
+                        <div class="col-12">${HoaDon.ten_nguoi_nhan}</div>
+                        <div class="col-12">${HoaDon.sdt_nguoi_nhan}</div>
+                        <div class="col-12">${HoaDon.dia_chi_nhan}
                         </div>
                     </div>
                 </div>
@@ -103,54 +122,33 @@
                             Thông tin đơn hàng
                         </div>
                         <div class="col-6 text-right font-weight-normal">
-                            Mã hoá đơn/Mã vận đơn: <span class="font-italic" style="color:red">#SP2344123</span>
+                            Mã hoá đơn/Mã vận đơn: <span class="font-italic" style="color:red">${HoaDon.id_hd}</span>
                         </div>
                     </div>
+                    <c:forEach var="item" items="${HoaDonChiTiet}">
                     <div class="col-12 row p-3 m-0">
                         <div class=" col-3 centerComponent">
-                            <img src="/images/1.png" style="width:50px">
+                            <img src="/images/phone_images/${item.dienThoai.id_dt}/0.jpg" style="width:50px">
                         </div>
                         <div class="col-5 row p-0 m-0">
                             <div class="col-12">
-                                <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a>
+                                <a href="/item/product/${item.dienThoai.id_dt}">${item.dienThoai.ten_dt}</a>
                             </div>
                             <div class="col-12">
-                                Nhà sản xuất: Apple
+                                Nhà sản xuất: ${item.dienThoai.nha_sx}
                             </div>
                             <div class="col-12">
-                                Bảo hành: 2 năm
+                                Bảo hành: ${item.dienThoai.bao_hanh}
                             </div>
                         </div>
                         <div class="col-2 centerComponent" style="word-wrap:break-word">
-                            <span>36.990.000 x 2</span>
+                            <span><fmt:formatNumber value="${item.dienThoai.gia}" type="CURRENCY" currencyCode="VND" /> x ${item.so_luong_don}</span>
                         </div>
                         <div class="col-2 centerComponent" style="word-wrap:break-word">
-                            <span>73.980.000đ</span>
+                            <span><fmt:formatNumber value="${item.tong_gia_dct}" type="CURRENCY" currencyCode="VND" /><span>
                         </div>
                     </div>
-                    <div class="col-12 row p-3 m-0">
-                        <div class="col-3 centerComponent">
-                            <img src="/images/2.png" style="width:50px">
-                        </div>
-                        <div class="col-5 row p-0 m-0">
-                            <div class="col-12">
-                                <a href="/views/pageUser/detailProduct.jsp">Tablet Samsung Galaxy S</a>
-                            </div>
-                            <div class="col-12">
-                                Nhà sản xuất: Samsung
-                            </div>
-                            <div class="col-12">
-                                Bảo hành: 2 năm
-                            </div>
-                        </div>
-                        <div class="col-2 centerComponent">
-                            <span>12.000.000 x 2</span>
-                        </div>
-                        <div class="col-2 centerComponent">
-                            <span>24.000.000đ</span>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
                 <hr class="col-12 m-0 p-0" style="color:gray" />
                 <div class="orderPriceInfor row col-12 m-0 p-0 mb-3">
@@ -158,7 +156,7 @@
                         <div class="text-right font-weight-bold">Tổng giá trị hoá đơn: </div>
                     </div>
                     <div class="col-12">
-                        <div class="text-right">97.980.000đ </div>
+                        <div class="text-right"><fmt:formatNumber value="${HoaDon.tong_gia}" type="CURRENCY" currencyCode="VND" /></div>
                     </div>
                     <div class="col-12">
                         <div class="text-right font-weight-bold">Phí vận chuyển: </div>
@@ -176,7 +174,7 @@
                         <div class="text-right font-weight-bold">Thành tiền: </div>
                     </div>
                     <div class="col-12">
-                        <div class="text-right" style="color:red">97.993.000đ </div>
+                        <div class="text-right" style="color:red"><fmt:formatNumber value="${HoaDon.tong_gia + 13000}" type="CURRENCY" currencyCode="VND" /></div>
                     </div>
                 </div>
             </form>

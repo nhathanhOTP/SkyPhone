@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +19,11 @@
     <link href="/staff/commentStyle.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/staff/script.js"></script>
+    <script>
+        function notification(text){
+            alert(text);
+        }
+    </script>
 </head>
 
 <body>
@@ -45,13 +51,13 @@
             </div>
         </nav>
         <form class="category" onmouseover="showCategory(this)" onmouseout="closeCategory(this)">
-            <a href="/views/pageEmploy/staff_main.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy" class="categoryItem">
                 <i class="bi bi-house"></i> &ensp; Trang chủ
             </a>
-            <a href="/views/pageEmploy/staff_order.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/order" class="categoryItem">
                 <i class="bi bi-box-seam"></i> &ensp; Đơn hàng
             </a>
-            <a href="/views/pageEmploy/staff_comment.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/comment" class="categoryItem">
                 <i class="bi bi-filter-square"></i> &ensp; Đánh giá
             </a>
         </form>
@@ -61,116 +67,39 @@
                     Đánh giá
                 </div>
                 <div class="commentTable">
+                    <c:if test="${danhGia.content.size() == 0}">
+                        <div class="row">
+                            <h2 class="text-dark col-lg-12  text-center">Không có đánh giá cần duyệt</h2>
+                        </div>
+                    </c:if>
+                    <c:forEach var="item" items="${danhGia.content}">
                     <div class="comment row">
                         <div class="customerTitle col-12">
-                            Khách hàng <b>Duy Nguyễn</b> đã đánh giá
+                            Khách hàng <b>${item.sdt}</b> đã đánh giá
                         </div>
                         <div class="commentInfor col-4 row">
-                            <div class="col-12">Điện thoại: 0912571469</div>
-                            <div class="col-12">Sản phẩm đánh giá: <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a> </div>
-                            <div class="col-12">Số sao: 4/5 <i class="fa fa-star" style="color:yellow;"></i></div>
+                            <div class="col-12">Sản phẩm đánh giá: <a href="/item/product/${item.dienThoai.id_dt}">${item.dienThoai.ten_dt}</a> </div>
+                            <div class="col-12">Loại: ${item.dienThoai.mau}/${item.dienThoai.dung_luong}</div>
                         </div>
                         <div class="theComment col-7 row">
                             <div class="col-12 font-weight-bold">Mô tả đánh giá:</div>
-                            <div class="col-12 font-italic">Sản phẩm rất tuyệt vời, lần đầu tiên tôi không tin tưởng bạn Nhã tuy nhiên sau khi trải nghiệm sản phẩm thì sản phẩm rất tuyệt vời</div>
+                            <div class="col-12 font-italic">${item.noi_dung}</div>
                         </div>
                         <div class="buttonComment col-12 row">
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:green">Phê
+                            <div class="col-12 mb-2"><button formmethod="POST" formaction="/skyPhoneEmploy/comment/accept/${item.stt}" class="p-2 w-100 h-100 m-auto" style="color:green">Phê
                                     duyệt</button></div>
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
+                            <div class="col-12 mb-2"><button formmethod="POST" formaction="/skyPhoneEmploy/comment/delete/${item.stt}" class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
                                     bỏ</button></div>
                         </div>
                     </div>
-                    <div class="comment row">
-                        <div class="customerTitle col-12">
-                            Khách hàng <b>Thanh Nhã</b> đã đánh giá
-                        </div>
-                        <div class="commentInfor col-4 row">
-                            <div class="col-12">Điện thoại: 0912571469</div>
-                            <div class="col-12">Sản phẩm đánh giá: <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a> </div>
-                            <div class="col-12">Số sao: 4/5 <i class="fa fa-star" style="color:yellow;"></i></div>
-                        </div>
-                        <div class="theComment col-7 row">
-                            <div class="col-12 font-weight-bold">Mô tả đánh giá:</div>
-                            <div class="col-12 font-italic">Sản phẩm tuyệt vời vì Nhã không đẹp trai</div>
-                        </div>
-                        <div class="buttonComment col-12 row">
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:green">Phê
-                                    duyệt</button></div>
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
-                                    bỏ</button></div>
-                        </div>
-                    </div>
-                    <div class="comment row">
-                        <div class="customerTitle col-12">
-                            Khách hàng <b>Quốc Toàn</b> đã đánh giá
-                        </div>
-                        <div class="commentInfor col-4 row">
-                            <div class="col-12">Điện thoại: 0912571469</div>
-                            <div class="col-12">Sản phẩm đánh giá: <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a> </div>
-                            <div class="col-12">Số sao: 4/5 <i class="fa fa-star" style="color:yellow;"></i></div>
-                        </div>
-                        <div class="theComment col-7 row">
-                            <div class="col-12 font-weight-bold">Mô tả đánh giá:</div>
-                            <div class="col-12 font-italic">Sản phẩm rất tuyệt vời</div>
-                        </div>
-                        <div class="buttonComment col-12 row">
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:green">Phê
-                                    duyệt</button></div>
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
-                                    bỏ</button></div>
-                        </div>
-                    </div>
-                    <div class="comment row">
-                        <div class="customerTitle col-12">
-                            Khách hàng <b>Huy</b> đã đánh giá
-                        </div>
-                        <div class="commentInfor col-4 row">
-                            <div class="col-12">Điện thoại: 0912571469</div>
-                            <div class="col-12">Sản phẩm đánh giá: <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a> </div>
-                            <div class="col-12">Số sao: 3/5 <i class="fa fa-star" style="color:yellow;"></i></div>
-                        </div>
-                        <div class="theComment col-7 row">
-                            <div class="col-12 font-weight-bold">Mô tả đánh giá:</div>
-                            <div class="col-12 font-italic">Cũng tạm được</div>
-                        </div>
-                        <div class="buttonComment col-12 row">
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:green">Phê
-                                    duyệt</button></div>
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
-                                    bỏ</button></div>
-                        </div>
-                    </div>
-                    <div class="comment row">
-                        <div class="customerTitle col-12">
-                            Khách hàng <b>Vy</b> đã đánh giá
-                        </div>
-                        <div class="commentInfor col-4 row">
-                            <div class="col-12">Điện thoại: 0912571469</div>
-                            <div class="col-12">Sản phẩm đánh giá: <a href="/views/pageUser/detailProduct.jsp">iPhone 13 Pro Max
-                                    256GB</a> </div>
-                            <div class="col-12">Số sao: 5/5 <i class="fa fa-star" style="color:yellow;"></i></div>
-                        </div>
-                        <div class="theComment col-7 row">
-                            <div class="col-12 font-weight-bold">Mô tả đánh giá:</div>
-                            <div class="col-12 font-italic">Sản phẩm quá xịn</div>
-                        </div>
-                        <div class="buttonComment col-12 row">
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:green">Phê
-                                    duyệt</button></div>
-                            <div class="col-12 mb-2"><button class="p-2 w-100 h-100 m-auto" style="color:red">Huỷ
-                                    bỏ</button></div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
-                <div class="centerText row">
-                    <button disabled class="col-lg-5 col-sm-12 m-lg-auto mb-sm-2">Trang trước đó</button>
-                    <button class="col-lg-5 col-sm-12 m-lg-auto mb-sm-2">Trang tiếp theo</button>
-                </div>
+                <c:if test="${danhGia.content.size() != 0}">
+                    <div class="centerText row">
+                        <button onclick="notification('Duyệt đánh giá thành công')" ${danhGia.number == 0? 'disabled':''} formaction="/skyPhoneEmploy/order?page${danhGia.number - 1}"  class="col-lg-5 col-sm-12 m-lg-auto mb-sm-2">Trang trước đó</button>
+                        <button onclick="notification('Duyệt đánh giá thành công')" ${danhGia.number >= (danhGia.totalPages-1)? 'disabled':''} formaction="/skyPhoneEmploy/order?page${danhGia.number + 1}" class="col-lg-5 col-sm-12 m-lg-auto mb-sm-2">Trang tiếp theo</button>
+                    </div>
+                </c:if>
             </form>
         </div>
     </div>

@@ -43,17 +43,17 @@
             </div>
         </nav>
         <form class="category" onmouseover="showCategory(this)" onmouseout="closeCategory(this)">
-            <a href="/views/pageEmploy/staff_main.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy" class="categoryItem">
                 <i class="bi bi-house"></i> &ensp; Trang chủ
             </a>
-            <a href="/views/pageEmploy/staff_order.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/order" class="categoryItem">
                 <i class="bi bi-box-seam"></i> &ensp; Đơn hàng
             </a>
-            <a href="/views/pageEmploy/staff_comment.jsp" class="categoryItem">
+            <a href="/skyPhoneEmploy/comment" class="categoryItem">
                 <i class="bi bi-filter-square"></i> &ensp; Đánh giá
             </a>
         </form>
-        <div class="mainContent">
+        <form class="mainContent">
             <div class="theContent w-auto h-auto">
                 <div class="contentTitle">Xin chào, chúc bạn 1 ngày làm việc tốt lành</div><br />
                 <div class="contentList row">
@@ -64,11 +64,11 @@
                                 <i class="bi bi-box-seam"></i>
                             </div>
                             <div class="col-lg-8 p-2 font-weight-bold m-auto">
-                                <span>0 chờ duyệt</span>
+                                <span>${countOrder} chờ duyệt</span>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button disabled>Xử lý ngay</button>
+                            <button ${countOrder == 0? 'disabled':''} formaction="/skyPhoneEmploy/order">Xử lý ngay</button>
                         </div>
                     </div>
                     <div class="col-lg-5 col-sm-10 m-lg-auto mb-sm-5 card">
@@ -78,16 +78,16 @@
                                 <i class="bi bi-filter-square"></i>
                             </div>
                             <div class="col-lg-8 p-2 font-weight-bold m-auto">
-                                <span>100 chờ duyệt</span>
+                                <span>${countComment} chờ duyệt</span>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button>Xử lý ngay</button>
+                            <button ${countComment == 0? 'disabled':''} formaction="/skyPhoneEmploy/comment" >Xử lý ngay</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 </body>
