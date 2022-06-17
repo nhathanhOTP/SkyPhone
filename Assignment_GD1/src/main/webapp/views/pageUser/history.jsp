@@ -20,52 +20,53 @@
 		<thead class="text-secondary">
 			<tr>
 				<th>Mã đơn hàng</th>
-				<th class="text-center">Sản phẩm</th>
+				<th>Sản phẩm</th>
 				<th>Giá</th>
 				<th>Ngày đặt mua</th>
 				<th>Trạng thái</th>
 			</tr>
 		</thead>
 		<c:forEach var="itemhd" items="${HD}">
+
 			<tbody>
-				<tr style="border-top: 0.05px solid lightgray;border-bottom:0.05px solid lightgray">
-					<td class="py-1 text-primary p-2">#${itemhd.id_hd}</td>
-					<td class="p-2">
-						<c:forEach var="itemhdct" items="${itemhd.getHDChiTiet()}">
-							<div class="row">
+				<tr>
+					<td class="py-1 text-primary">#${itemhd.id_hd}</td>
+
+					<td class="">
+					<c:forEach var="itemhdct" items="${HDCT}" end="0">
+							<div class="sanPhamDt row">
 								<div class="col-3">
-									<a href="/item/product/${itemhdct.dienThoai.id_dt}"> <img src="/images/phone_images/${itemhdct.dienThoai.id_dt}/0.jpg"
-										class="img-fluid" width="400px" alt=""></a>
+									<a href=""> <img src="/images/iphone-13-pro-max-2.jpg"
+										class="img-fluid" width="70px" alt=""></a>
 								</div>
-								<div class="col-3" style="display:flex; justify-content:center; align-items:center">
-									<p class="text-danger m-0 ">${itemhdct.so_luong_don}x</p>
-								</div>
-								<div class="col-6" style="display:flex; justify-content:center; align-items:center">
-									<p class="text-danger m-0 ">${itemhdct.dienThoai.ten_dt}</p>
+								<div class="col-9">
+									<p class="text-danger">${itemhdct.ten_dt}</p>
 								</div>
 							</div>
-						</c:forEach>
+							<div>
+								<a href="" class="text-primary">Xem chi tiết</a>
+							</div>
+						</c:forEach></td>
+					<td>
+						<p class="text-danger">${itemhd.tong_gia}</p>
 					</td>
-					<td class="p-2">
-						<p class="text-danger"><fmt:formatNumber value="${itemhd.tong_gia}" type="currency" currencyCode="VND"/></p>
+					<td>
+						<p>${itemhd.ngay_tao_don}</p>
 					</td>
-					<td class="p-2">
-						<p><fmt:formatDate value="${itemhd.ngay_tao_don}" pattern="dd-MM-yyyy"/></p>
-					</td>
-					<td class="p-2"><c:choose>
+					<td><c:choose>
 							<%-- Thanh cong --%>
-							<c:when test="${itemhd.tinh_trang==2}">
-								<label class="text-success">Đã giao thành công!</label>
+							<c:when test="${itemhd.tinh_trang==1}">
+								<label class="text-success"">Đã giao thành công!</label>
 							</c:when>
 
 							<%-- Chua giao --%>
 							<c:when test="${itemhd.tinh_trang==0}">
-								<label class="text-danger">Chưa giao!</label>
+								<label class="text-danger"">Chưa giao!</label>
 							</c:when>
 
 							<%-- Các trường hợp khác --%>
 							<c:otherwise>
-								<label class="text-warning">Đang sử lí!</label>
+								<label class="text-warning"">Đang sử lí!</label>
 							</c:otherwise>
 						</c:choose></td>
 					</td>
