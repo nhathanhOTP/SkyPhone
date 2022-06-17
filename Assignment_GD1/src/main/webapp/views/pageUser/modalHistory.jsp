@@ -24,12 +24,12 @@
                             <div class="text w-100 text-center py-5">
                                 <h2 class="mb-0">50<span>%</span> Off</h2>
                                 <h4 class="mb-4">Cho tất cả các nhãn hàng SkyPhone</h4>
-                                <form action="#" class="code-form">
+                                <form action="/user/history/${hd.sdt_nguoi_nhan}" class="code-form">
                                     <div class="form-group d-flex">
-                                        <input type="text" class="form-control" placeholder="Số điện thoại của bạn">
+                                        <input type="text" class="form-control" name="id" value="${id}"  placeholder="Số điện thoại của bạn">
                                     </div>
+                                    <button class="btn btn-primary d-block py-3">Kiểm tra số điện thoại</button>
                                 </form>
-                                <a href="#" class="btn btn-primary d-block py-3">Kiểm tra số điện thoại</a>
                             </div>
                         </div>
                     </div>

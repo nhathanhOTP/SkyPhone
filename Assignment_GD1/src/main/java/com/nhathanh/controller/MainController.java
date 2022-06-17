@@ -3,10 +3,14 @@ package com.nhathanh.controller;
 import com.nhathanh.dao.*;
 import com.nhathanh.model.DanhGia;
 import com.nhathanh.model.DienThoai;
+import com.nhathanh.model.HDChiTiet;
 import com.nhathanh.model.HoaDon;
 import com.nhathanh.model.NhanHang;
+import com.nhathanh.service.SessionService;
 import com.nhathanh.service.ShoppingCartInfor;
 import com.nhathanh.service.ShoppingCartService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -75,13 +79,21 @@ public class MainController {
 	NhanHangDAO nhDAO;
 	@Autowired
 	ShoppingCartService scs;
+	@Autowired
+	SessionService ss;
 
 	// -----------------------------------------GET Mapping
 	// Method--------------------------------------------
 	// -----------------------------------------User
 	// URL--------------------------------------------
 	@GetMapping("/skyPhoneUser")
-	public String getLink1() {
+	public String getLink1(Model model, @RequestParam("p") Optional<Integer> p) {
+//		Optional<Integer> p = Optional.of(0);
+		Pageable pageable = PageRequest.of(p.orElse(0), 12);
+//		List<DienThoai> dt = dtDAO.findAll();
+		Page<DienThoai> page = dtDAO.listDienThoaiDisplay(false, pageable);
+//		model.addAttribute("item", dt);
+		model.addAttribute("page", page);
 		return "/pageUser/index";
 	}
 
@@ -100,6 +112,26 @@ public class MainController {
 			model.addAttribute("detailItem", dt);
 			model.addAttribute("dungLuongVaMau", dungLuongVaMau);
 			return "/pageUser/detailProduct";
+		}
+	}
+
+	// Siri:Kiểm tra lịch sử đơn hàng
+	@GetMapping("/user/history")
+	public String checkHistoryOrder(Model model, @RequestParam("id") Optional<String> sdt_hd) {
+		String sdt = sdt_hd.orElse(ss.get("id"));
+//		HDChiTiet hdct= hdctDAO.findById(sdt).get();
+//		Dữ liệu null thì gọi trang error
+		if (sdt_hd.orElse(ss.get("id")).equals("") || sdt_hd.orElse(ss.get("id")) == null) {
+			return "/errorPage/error404";
+		} else {
+			List<HoaDon> HoaDon = hdDAO.getHoaDonBySDT(sdt);
+			List<HoaDon> HoaDonName = hdDAO.getHDbyName(sdt);
+			List<HDChiTiet> hdct = hdctDAO.getHDCTByid(sdt);
+//					AddAttribute lịch sử mua hàng
+			model.addAttribute("HDN", HoaDonName);
+			model.addAttribute("HD", HoaDon);
+			model.addAttribute("HDCT", hdct);
+			return "/pageUser/historyOrder";
 		}
 	}
 

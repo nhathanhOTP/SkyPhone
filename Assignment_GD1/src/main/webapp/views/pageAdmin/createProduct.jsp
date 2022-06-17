@@ -23,6 +23,24 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.1.2/typicons.min.css">
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="/css/cssAdmin/tableCreate.css">
+<style>
+.paginate_button {
+	padding: 10px;
+	border: 1px solid #e3e3e3;
+	cursor: pointer;
+}
+
+.paginate_button:hover {
+	text-decoration: none;
+	background-color: gray;
+}
+
+.paginate_button:focus {
+	color: white;
+	background-color: #3cadff;
+}
+</style>
 </head>
 
 <body>
@@ -157,11 +175,11 @@
 								<div class="card-body">
 									<h4 class="card-title">Sản phẩm chưa được thêm hình</h4>
 									<p class="card-description">
-										Tạo mới
+										Thêm hình
 										<code>sản phẩm</code>
 									</p>
 									<div class="table-responsive">
-										<table class="table table-striped">
+										<table class="table table-striped" id="dataTables-example">
 											<thead>
 												<tr>
 													<th>Tên Sản phẩm</th>
@@ -171,52 +189,26 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>IPhone 13 Pro max gold</td>
-													<td class="text-danger">28,760000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="add">Thêm ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 13 Pro max white</td>
-													<td class="text-danger">21.060000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="add">Thêm ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 13 Pro max blue</td>
-													<td class="text-danger">35.000000 <i
-														class="typcn typcn-arrow-sorted-down"></i></td>
-													<td>0</td>
-													<td><button class="add">Thêm ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 13 Pro max gray</td>
-													<td class="text-success">82.000000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>0</td>
-													<td><button class="add">Thêm ảnh</button></td>
-												</tr>
-												<tr>
-													<td>IPhone 13 Pro max version limit</td>
-													<td class="text-success">98.050000 <i
-														class="typcn typcn-arrow-sorted-up"></i></td>
-													<td>0</td>
-													<td><button class="add">Thêm ảnh</button></td>
-												</tr>
+												<c:forEach var="item" items="${sanPhamKoHinh}">
+													<tr>
+														<td>${item.ten_dt}</td>
+														<td class="text-danger"><fmt:formatNumber
+																type="number" value="${item.gia}" /> <i
+															class="typcn typcn-arrow-sorted-down"></i></td>
+														<td>${item.tra_gop}</td>
+														<td>
+															<form action="/skyPhone/image/${item.id_dt}"
+																method="post">
+																<button class="add"
+																	formaction="/skyPhone/image/${item.id_dt}"
+																	type="submit">Thêm ảnh</button>
+															</form>
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
-										<nav aria-label="Page navigation example">
-											<ul class="pagination mt-3">
-												<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">Next</a></li>
-											</ul>
-										</nav>
+
 									</div>
 								</div>
 							</div>
@@ -234,13 +226,21 @@
 		<!-- page-body-wrapper ends -->
 	</div>
 	<!-- container-scroller -->
-
 	<script src="/js/jsAdmin/vendor.bundle.base.js"></script>
 	<script src="/js/jsAdmin/off-canvas.js"></script>
 	<script src="/js/jsAdmin/hoverable-collapse.js"></script>
 	<script src="/js/jsAdmin/template.js"></script>
 	<script src="/js/jsAdmin/settings.js"></script>
 	<script src="/js/jsAdmin/todolist.js"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="/js/assert/boostrapJs.js"></script>
+	<script src="/js/assert/jquery.js"></script>
+	<script src="/js/assert/dataTable.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
 </body>
 
 </html>

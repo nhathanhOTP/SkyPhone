@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,23 +70,27 @@
 						</ul>
 					</div>
 					<div class="col-xl-9 col-md-9">
-						<div class="row">
-							<div class="col-lg-8">
-								<p class="text-dark">
-									Chào <b class="font-weight-bold">NhaThanh - 0374038128</b>
-								</p>
+						<c:forEach var="itemN" items="${HDN}" end='0'>
+							<div class="row">
+								<div class="col-lg-8">
+									<p class="text-dark">
+										Chào <b class="font-weight-bold">${itemN.nguoi_thanh_toan}
+											- ${itemN.sdt_nguoi_nhan}</b>
+									</p>
+								</div>
+								<div class="row sunRight col-lg-4">
+									<a href="" class="text-primary"><i class="fa fa-comments"
+										aria-hidden="true"></i> Phản hồi, góp ý</a>
+									<div class="space"></div>
+									<a href="" class="text-primary font-weight-bold">Thoát tài
+										khoản</a>
+								</div>
 							</div>
-							<div class="row sunRight col-lg-4">
-								<a href="" class="text-primary"><i class="fa fa-comments"
-									aria-hidden="true"></i> Phản hồi, góp ý</a>
-								<div class="space"></div>
-								<a href="" class="text-primary font-weight-bold">Thoát tài
-									khoản</a>
-							</div>
-						</div>
+						</c:forEach>
+
 						<div class="card" style="width: 65rem;">
 							<!-- Page inclue -->
-							<jsp:include page="${history}" />
+							<jsp:include page="/views/pageUser/history.jsp" />
 							<!-- End page -->
 						</div>
 					</div>

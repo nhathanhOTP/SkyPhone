@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +21,11 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body>
+	<script>
+		if ("${message}" != "") {
+			alert("${message}")
+		}
+	</script>
 	<div class="container-scroller">
 		<!-- Nav -->
 		<jsp:include page="/views/layOut/navAdmin.jsp" />
@@ -36,24 +44,29 @@
 								<div class="card-body">
 									<h4 class="card-title">Nhãn hàng của các sản phẩm</h4>
 									<p class="card-description">
-										Quản lý<code>nhãn hàng sản phẩm</code>
+										Quản lý
+										<code>nhãn hàng sản phẩm</code>
 									</p>
 									<hr />
 									<div class=row>
 										<div class="col-lg-6 grid-margin stretch-card">
-											<form style="width: 100%;">
+											<form:form action="/brand/update" modelAttribute="item"
+												style="width: 100%;">
 												<div class="form-group">
-													<p class="card-description text-center">Tùy chỉnh nhãn hàng</p>
-													<input type="text" class="form-control w-100"
-														id="formGroupExampleInput2" placeholder="Nhãn hàng khác">
+													<p class="card-description text-center">Tùy chỉnh nhãn
+														hàng</p>
+													<form:input path="ten_nhan_hang" type="text"
+														class="form-control w-100" id="formGroupExampleInput2"
+														placeholder="Nhãn hàng khác" />
 													<div class="row mt-4"
 														style="display: flex; justify-content: center; align-items: center;">
-														<button class="btn btn-success">Thêm vào nhãn
-															hàng</button>
-														<button class="btn btn-danger ml-3">Sửa nhãn hàng</button>
+														<button formaction="/brand/create" class="btn btn-success">Thêm
+															vào nhãn hàng</button>
+														<button formaction="/brand/update"
+															class="btn btn-danger ml-3">Sửa nhãn hàng</button>
 													</div>
 												</div>
-											</form>
+											</form:form>
 										</div>
 										<div class="col-lg-6 grid-margin stretch-card">
 											<div class="table-responsive">
@@ -68,50 +81,32 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td>1</td>
-															<td>Nokia</td>
-															<td>
-																<button class="cancel">Chỉnh sửa</button>
-															</td>
-														</tr>
-														<tr>
-															<td>2</td>
-															<td>Vivo</td>
-															<td>
-																<button class="cancel">Chỉnh sửa</button>
-															</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Apple</td>
-															<td>
-																<button class="cancel">Chỉnh sửa</button>
-															</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>SamSung</td>
-															<td>
-																<button class="cancel">Chỉnh sửa</button>
-															</td>
-														</tr>
-														<tr>
-															<td>5</td>
-															<td>Xiaomi</td>
-															<td>
-																<button class="cancel">Chỉnh sửa</button>
-															</td>
-														</tr>
+														<c:forEach var="item" items="${items.content}">
+															<tr>
+																<td>${item.id}</td>
+																<td>${item.ten_nhan_hang}</td>
+																<td>
+																	<form action="/brand/edit/${item.id}" method="post">
+																		<button formaction="/brand/edit/${item.id}"
+																			class="cancel">Chỉnh sửa</button>
+																	</form>
+																</td>
+															</tr>
+
+														</c:forEach>
 													</tbody>
 												</table>
 												<nav aria-label="Page navigation example"
 													style="display: flex; justify-content: center; align-items: center;">
-													<ul class="pagination mt-3">
-														<li class="page-item"><a class="page-link" href="#">First</a></li>
-														<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-														<li class="page-item"><a class="page-link" href="#">Next</a></li>
-														<li class="page-item"><a class="page-link" href="#">Last</a></li>
+													<ul class="pagination pagination-sm mt-3">
+														<li class="page-item"><a class="page-link"
+															href="/SkyPhone/brand/page?p=0">First</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/SkyPhone/brand/page?p=${items.number-1 <= 0?0:items.number-1}">Previous</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/SkyPhone/brand/page?p=${items.number+1 >= items.totalPages-1?items.totalPages-1:items.number+1}">Next</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/SkyPhone/brand/page?p=${items.totalPages-1}">Last</a></li>
 													</ul>
 												</nav>
 											</div>

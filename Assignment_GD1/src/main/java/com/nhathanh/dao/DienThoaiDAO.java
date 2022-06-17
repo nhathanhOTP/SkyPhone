@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.nhathanh.model.DienThoai;
 
 public interface DienThoaiDAO extends JpaRepository<DienThoai, String> {
+	
 	@Query(value = "Select * from DienThoai dt where dt.ten_dt like ?1", nativeQuery=true)
     public List<DienThoai> getDienThoaiByTen(String ten_dt);
 

@@ -84,7 +84,7 @@
 					</div>
 					<div class="row ml-5 pl-5 ">
 						<!-- Hiển thị sản phẩm -->
-						<c:forEach var="item" items="${items}">
+						<c:forEach var="item" items="${page.content}">
 							<div class="card rounded-0 " style="width: 14rem;">
 								<a href="/item/product/${item.id_dt}" class="text-dark ">
 									<div class="arrow">
@@ -119,10 +119,12 @@
 						</c:forEach>
 						<!--Kết thúc hiển thị sản phẩm -->
 					</div>
+					
 					<div class="mt-4 watch ">
-						<button class="btn btn-light rounded border continue ">
-							Xem thêm 3470 sản phẩm <i class="bi bi-arrow-right-short "></i>
-						</button>
+						<a class="href_link" href="/skyPhoneUser?p=0">First</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.number-1}">Previous</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.number+1}">Next</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.totalPages-1}">Last</a>
 					</div>
 				</div>
 			</div>
