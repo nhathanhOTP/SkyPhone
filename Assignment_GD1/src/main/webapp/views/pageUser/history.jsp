@@ -32,7 +32,8 @@
 				<tr>
 					<td class="py-1 text-primary">#${itemhd.id_hd}</td>
 
-					<td class=""><c:forEach var="itemhdct" items="${HDCT}">
+					<td class="">
+					<c:forEach var="itemhdct" items="${HDCT}" end="0">
 							<div class="sanPhamDt row">
 								<div class="col-3">
 									<a href=""> <img src="/images/iphone-13-pro-max-2.jpg"
