@@ -40,7 +40,7 @@
 										class="img-fluid" width="70px" alt=""></a>
 								</div>
 								<div class="col-9">
-									<p class="text-danger">${itemhdct.ten_dt}</p>
+									<p class="text-danger"></p>
 								</div>
 							</div>
 							<div>

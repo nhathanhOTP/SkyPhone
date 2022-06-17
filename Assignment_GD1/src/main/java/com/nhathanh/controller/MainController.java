@@ -115,7 +115,7 @@ public class MainController {
 		}
 	}
 
-	// Siri:Kiểm tra lịch sử đơn hàng
+	// HUY:Kiểm tra lịch sử đơn hàng
 	@GetMapping("/user/history")
 	public String checkHistoryOrder(Model model, @RequestParam("id") Optional<String> sdt_hd) {
 		String sdt = sdt_hd.orElse(ss.get("id"));
@@ -127,7 +127,7 @@ public class MainController {
 			List<HoaDon> HoaDon = hdDAO.getHoaDonBySDT(sdt);
 			List<HoaDon> HoaDonName = hdDAO.getHDbyName(sdt);
 			List<HDChiTiet> hdct = hdctDAO.getHDCTByid(sdt);
-//					AddAttribute lịch sử mua hàng
+//			AddAttribute lịch sử mua hàng
 			model.addAttribute("HDN", HoaDonName);
 			model.addAttribute("HD", HoaDon);
 			model.addAttribute("HDCT", hdct);
