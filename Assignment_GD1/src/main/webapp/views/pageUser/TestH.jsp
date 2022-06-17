@@ -9,6 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="card-title">
+		<div style="color: black;">
+			<b style="font-size: 22px;">Đơn hàng đã mua gần đây</b> <br> <small><i
+				class="fa fa-info-circle text-primary mr-1" aria-hidden="true"></i>
+				Đây là danh sách đơn hàng bạn đã mua từ ngày 05/06/2021 đến
+				05/06/2022</small>
+		</div>
+	</div>
 	<table>
 		<thead class="text-secondary">
 			<tr>
@@ -25,8 +33,7 @@
 				<tr>
 					<td class="py-1 text-primary">#${itemhd.id_hd}</td>
 
-					<td class="">
-					<c:forEach var="itemhdct" items="${HDCT}">
+					<td class=""><c:forEach var="itemhdct" items="${HDCT}">
 							<div class="sanPhamDt row">
 								<div class="col-3">
 									<a href=""> <img src="/images/iphone-13-pro-max-2.jpg"

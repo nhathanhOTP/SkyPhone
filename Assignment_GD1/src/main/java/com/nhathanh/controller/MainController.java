@@ -113,18 +113,18 @@ public class MainController {
 		String sdt = sdt_hd.orElse(ss.get("id"));
 //		HDChiTiet hdct= hdctDAO.findById(sdt).get();
 //		Dữ liệu null thì gọi trang error
-//				if(sdt.equals("") || sdt == null){
-//					return "/errorPage/error404";
-//				}else{
-		List<HoaDon> HoaDon = hdDAO.getHoaDonBySDT(sdt);
-		List<HoaDon> HoaDonName = hdDAO.getHDbyName(sdt);
-		List<HDChiTiet> hdct = hdctDAO.getHDCTByid(sdt);
+		if (sdt_hd.orElse(ss.get("id")).equals("") || sdt_hd.orElse(ss.get("id")) == null) {
+			return "/errorPage/error404";
+		} else {
+			List<HoaDon> HoaDon = hdDAO.getHoaDonBySDT(sdt);
+			List<HoaDon> HoaDonName = hdDAO.getHDbyName(sdt);
+			List<HDChiTiet> hdct = hdctDAO.getHDCTByid(sdt);
 //					AddAttribute lịch sử mua hàng
-		model.addAttribute("HDN", HoaDonName);
-		model.addAttribute("HD", HoaDon);
-		model.addAttribute("HDCT", hdct);
-		return "/pageUser/historyOrder";
-//				}
+			model.addAttribute("HDN", HoaDonName);
+			model.addAttribute("HD", HoaDon);
+			model.addAttribute("HDCT", hdct);
+			return "/pageUser/historyOrder";
+		}
 	}
 
 	// Siri:Thêm một sản phẩm vào giỏ hàng khi người dùng nhấn mua ngay

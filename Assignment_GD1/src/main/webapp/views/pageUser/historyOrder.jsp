@@ -90,7 +90,7 @@
 
 						<div class="card" style="width: 65rem;">
 							<!-- Page inclue -->
-							<jsp:include page="/views/pageUser/TestH.jsp" />
+							<jsp:include page="/views/pageUser/history.jsp" />
 							<!-- End page -->
 						</div>
 					</div>
