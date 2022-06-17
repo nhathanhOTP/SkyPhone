@@ -131,7 +131,7 @@
 												<c:forEach var="item" items="${itemUnActive.content}">
 													<tr>
 														<td><a href="/dienthoai/edit/${item.id_dt}"><img
-																src="/images/iphone-13-pro-max-gold-1-200x200.jpg"
+																src="/images/phone_images/${item.id_dt}/0.jpg"
 																alt=""></a></td>
 														<td>${item.ten_dt}</td>
 														<td>${item.dung_luong}</td>

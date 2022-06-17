@@ -9,11 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface HoaDonDAO extends JpaRepository<HoaDon, String> {
-	@Query(value = "SELECT hd.* FROM HoaDon hd, HDChiTiet hdct where hd.sdt_nguoi_nhan like ?1 AND hd.id_hd = hdct.id_hd", nativeQuery = true)
+	@Query(value = "SELECT * FROM HoaDon hd where hd.sdt_nguoi_nhan like ?1", nativeQuery = true)
 	public List<HoaDon> getHoaDonBySDT(String sdt_nguoi_nhan);
-
-	@Query(value = "SELECT hd.ten_nguoi_nhan, hd.sdt_nguoi_nhan, hd.id_hd FROM HoaDon hd where hd.sdt_nguoi_nhan like ?1", nativeQuery = true)
-	public List<HoaDon> getHDbyName(String sdt_nguoi_nhan);
 
 	@Query(value = "Select COUNT(*) From HoaDon hd where (hd.nguoi_thanh_toan like '' or hd.nguoi_thanh_toan like ?1) and hd.tinh_trang = 0", nativeQuery = true)
 	public List<Integer> findWaitingCount(String name);

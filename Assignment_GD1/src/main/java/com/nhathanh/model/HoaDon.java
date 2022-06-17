@@ -19,6 +19,7 @@ public class HoaDon {
     private double tong_gia;
     private String dia_chi_gui;
     private String ten_nguoi_nhan;
+    @Column(name="sdt_nguoi_nhan")
     private String sdt_nguoi_nhan;
     private String dia_chi_nhan;
     private Date ngay_tao_don;

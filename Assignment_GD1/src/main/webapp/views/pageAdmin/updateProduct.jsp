@@ -176,12 +176,12 @@
 											<tbody>
 												<c:forEach var="item" items="${sanPham.content}">
 													<tr>
-														<td>${item.ten_dt}</td>
+														<td>${item.ten_dt}/${item.mau}/${item.dung_luong}</td>
 														<td class="text-danger"><fmt:formatNumber
 																type="number" value="${item.gia}" /> <i
 															class="typcn typcn-arrow-sorted-down"></i></td>
 														<td>${item.tra_gop}%</td>
-														<td><a class="update" href="#"
+														<td><a class="update" href="/skyPhone/image/${item.id_dt}"
 															style="text-decoration: none; color: white;"> Cập
 																nhật ảnh</a></td>
 													</tr>

@@ -70,11 +70,11 @@
 						</ul>
 					</div>
 					<div class="col-xl-9 col-md-9">
-						<c:forEach var="itemN" items="${HDN}" end='0'>
+						<c:forEach var="itemN" items="${HD}" end='0'>
 							<div class="row">
 								<div class="col-lg-8">
 									<p class="text-dark">
-										Chào <b class="font-weight-bold">${itemN.nguoi_thanh_toan}
+										Chào <b class="font-weight-bold">${itemN.ten_nguoi_nhan}
 											- ${itemN.sdt_nguoi_nhan}</b>
 									</p>
 								</div>

@@ -40,6 +40,25 @@
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script>
+		if("${message}" !== "" ){
+			alert("${message}");
+		}
+
+		function checking(input){
+			if(input.value !== "" && input.value.length > 9){
+				document.getElementById('textComment').disabled = false;
+				document.getElementById('buttonComment').disabled = false;
+				document.getElementById('buttonComment').classList.remove("btn-secondary");
+				document.getElementById('buttonComment').classList.add("btn-primary");
+			}else{
+				document.getElementById('textComment').disabled = true;
+				document.getElementById('buttonComment').disabled = true;
+				document.getElementById('buttonComment').classList.add("btn-secondary");
+				document.getElementById('buttonComment').classList.remove("btn-primary");
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -345,8 +364,9 @@
 							</div>
 							<div class="row m-0 p-0 bg-white p-4">
 								<form class="text-dark col-12 row m-0 p-0">
-									<textarea class="form-control text-dark" placeholder="Mời bạn để lại đánh giá"></textarea>
-									<button class="btn btn-primary col-2 mt-2">Đăng đánh giá</button>
+									<input name="soDienThoai" class="form-control w-25" onkeyup="checking(this)" type="text" placeholder="Số điện thoại">
+									<textarea name="noiDung" disabled id="textComment" class="form-control text-dark mt-2" placeholder="Mời bạn để lại đánh giá"></textarea>
+									<button disabled id="buttonComment" formaction="/item/product/addComment/${detailItem.id_dt}" formmethod="post" class="btn btn-secondary col-2 mt-2">Đăng đánh giá</button>
 								</form>
 								<hr class="col-11 text-gray"/>
 								<div class="col-12 row m-0 p-0">

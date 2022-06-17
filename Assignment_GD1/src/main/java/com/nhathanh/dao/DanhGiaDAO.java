@@ -25,4 +25,7 @@ public interface DanhGiaDAO extends JpaRepository<DanhGia, String> {
     @Modifying @Transactional
     @Query(value="Update DanhGia set trang_thai = 1 where stt = ?1", nativeQuery = true)
     public void acceptById(int id);
+    @Modifying @Transactional
+    @Query(value="Insert into DanhGia(sdt, noi_dung, trang_thai, id_dt) values (?1, ?2, ?3, ?4)", nativeQuery = true)
+    public void addDanhGia(String sdt, String noidung, int tinhtrang, String id);
 }

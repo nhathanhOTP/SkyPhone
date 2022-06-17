@@ -15,6 +15,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 	@Autowired
 	SessionService session;
 	//Đối với mình vai trò 0 là Admin nhé mọi người
+	//Vai trò 1 là Employ
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

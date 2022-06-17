@@ -21,5 +21,4 @@ public interface DienThoaiDAO extends JpaRepository<DienThoai, String> {
 
 	@Query(value = "Select o from DIENTHOAI o where o.hoat_dong = ?1")
 	public Page<DienThoai> listDienThoaiDisplay(boolean hoatDong, Pageable pageable);
-
 }

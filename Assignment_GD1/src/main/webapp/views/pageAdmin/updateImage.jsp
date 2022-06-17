@@ -44,19 +44,19 @@
 								<div class="card-body">
 									<h4 class="card-title">Sản phẩm đang cập nhật ảnh</h4>
 									<hr>
-									<form action="" class="form-sample">
+									<form enctype='multipart/form-data' action="" class="form-sample">
 										<div class="row">
-											<div class="text-left col-lg-7">${dienThoai.ten_dt!=""?dienThoai.ten_dt:'Vui lòng chọn sản phẩm cập nhật'}</div>
+											<div class="text-left col-lg-7">${dienThoai.ten_dt!=""?dienThoai.ten_dt:'Vui lòng chọn sản phẩm cập nhật'}/${dienThoai.mau!=""?dienThoai.mau:''}/${dienThoai.dung_luong!=""?dienThoai.dung_luong:''}</div>
 											<div class="text-left col-lg-5">ID Sản phẩm:
 												${dienThoai.id_dt!=""?dienThoai.id_dt:'Trang cập nhật ảnh sản phẩm'}</div>
 										</div>
 										<div class="mt-5">
 											<div class="col-lg-12 m-auto text-center img-fluid">
-												<input type="file" id="file-input1" name="filename"
-													accept="image/gif, image/jpeg, image/png"
+												<input type="file" id="file-input1" name="anhChinh"
+													accept="image/gif, image/jpeg, image/png, image/jpg"
 													onchange="readURL(this);"> <label for="file-input1"
-													class="file-label1 "> <img id="blah1" src="#"
-													alt="" class="mainImg img-fluid" width="530" height="510" />
+													class="file-label1 "> <img id="blah1" src="${mainImage != ""? mainImage:''}"
+													alt="" name="mainImage" class="mainImg img-fluid" width="530" height="510" />
 												</label> <br> <span class="text-center"> <span
 													id="file-name1"></span>
 												</span>
@@ -64,38 +64,38 @@
 											</div>
 											<div class="row canGiua">
 												<div>
-													<input type="file" id="file-input2" name="filename"
-														accept="image/gif, image/jpeg, image/png"
+													<input type="file" id="file-input2" name="anhPhu1"
+														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL1(this);"> <label
 														for="file-input2" class="file-label2"> <img
-														id="blah2" src="" alt="" width="130" height="130"
+														id="blah2" src="${image1 != ""? image1:''}" name="image1" alt="" width="130" height="130"
 														style="outline: none;" />
 													</label> <br> <span id="file-name2" style="font-size: 8px;"></span>
 												</div>
 												<br> <br>
 												<div>
-													<input type="file" id="file-input3" name="filename"
-														accept="image/gif, image/jpeg, image/png"
+													<input type="file" id="file-input3" name="anhPhu2"
+														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL2(this);"> <label
 														for="file-input3" class="file-label3"> <img
-														id="blah3" src="#" alt="" width="130" height="130"
+														id="blah3" src="${image2 != ""? image2:''}" name="image2" alt="" width="130" height="130"
 														style="outline: none;" />
 													</label> <br> <span id="file-name3" style="font-size: 8px;"></span>
 												</div>
 												<br> <br>
 												<div>
-													<input type="file" id="file-input4" name="filename"
-														accept="image/gif, image/jpeg, image/png"
+													<input type="file" id="file-input4" name="anhPhu3"
+														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL3(this);"> <label
 														for="file-input4" class="file-label4"> <img
-														id="blah4" src="#" alt="" width="130" height="130"
+														id="blah4" src="${image3 != ""? image3:''}" name="image3" alt="" width="130" height="130"
 														style="outline: none;" />
 													</label> <br> <span id="file-name4" style="font-size: 8px;"></span>
 												</div>
 											</div>
 										</div>
 										<div class="canGiua mt-5">
-											<button class="updateImage"
+											<button class="updateImage" formmethod="POST" formaction="/skyPhone/image/add/${dienThoai.id_dt}"
 												style="background: linear-gradient(180deg, #d18d8d, #ff172e);">Cập
 												nhật ảnh vào sản phẩm</button>
 										</div>
@@ -131,13 +131,13 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="item" items="${sanPham}">
+												<c:forEach var="item" items="${sanPham}" varStatus="index">
 													<tr>
-														<td>${item.ten_dt}</td>
+														<td>${item.ten_dt}/${item.mau}/${item.dung_luong}</td>
 														<td class="text-danger"><fmt:formatNumber
 																type="number" value="${item.gia}" /><i
 															class="typcn typcn-arrow-sorted-down"></i></td>
-														<td>${soLuongAnh}</td>
+														<td>${soLuongAnh.get(index.index)}</td>
 														<td>
 															<form action="/skyPhone/image/${item.id_dt}"method="post">
 																<button class="update"
