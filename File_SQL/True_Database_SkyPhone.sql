@@ -51,8 +51,10 @@ CREATE TABLE HDChiTiet(
 	[stt] [int] PRIMARY KEY NOT NULL IDENTITY,
 	[so_luong_don] [int] NOT NULL,
 	[tong_gia_dct] [money] NOT NULL,
+	[sdt_nguoi_nhan] [nvarchar](11) NOT NULL,
 	[id_hd] [varchar](255) NOT NULL FOREIGN KEY REFERENCES HoaDon (id_hd),
-	[id_dt] [varchar](255) NOT NULL FOREIGN KEY REFERENCES DienThoai (id_dt)
+	[id_dt] [varchar](255) NOT NULL FOREIGN KEY REFERENCES DienThoai (id_dt),
+	[ten_dt] [nvarchar](50) NOT NULL,
 )
 CREATE TABLE DanhGia(
 	[stt] [int] PRIMARY KEY NOT NULL IDENTITY,

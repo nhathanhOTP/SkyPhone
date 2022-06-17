@@ -1,0 +1,14 @@
+GO
+SET IDENTITY_INSERT [dbo].[HDChiTiet] ON 
+
+INSERT [dbo].[HDChiTiet] ([stt], [so_luong_don], [tong_gia_dct], [sdt_nguoi_nhan], [id_hd], [id_dt], [ten_dt]) VALUES (1, 1, 10000.0000, N'0765230162', N'001', N'0174E760-B65E-40C8-A49E-893D86F2CD6B', N'Xiaomi 12 Pro')
+INSERT [dbo].[HDChiTiet] ([stt], [so_luong_don], [tong_gia_dct], [sdt_nguoi_nhan], [id_hd], [id_dt], [ten_dt]) VALUES (6, 1, 20000.0000, N'113', N'002', N'1F04D809-3E33-4044-B3B0-18CE876D6D3F', N'OPPO A76')
+INSERT [dbo].[HDChiTiet] ([stt], [so_luong_don], [tong_gia_dct], [sdt_nguoi_nhan], [id_hd], [id_dt], [ten_dt]) VALUES (8, 1, 23000.0000, N'0765230162', N'003', N'48C9D8F2-D0EB-4F70-AEAB-82F962CF6082', N'Masstel FAMI 60 4G')
+INSERT [dbo].[HDChiTiet] ([stt], [so_luong_don], [tong_gia_dct], [sdt_nguoi_nhan], [id_hd], [id_dt], [ten_dt]) VALUES (10, 1, 30000.0000, N'0765230162', N'004', N'5664DBFC-27A0-4881-AEC5-50D01439C92C', N'Vivo Y21')
+SET IDENTITY_INSERT [dbo].[HDChiTiet] OFF
+GO
+INSERT [dbo].[HoaDon] ([id_hd], [nguoi_thanh_toan], [so_luong_don], [tong_gia], [dia_chi_gui], [ten_nguoi_nhan], [sdt_nguoi_nhan], [dia_chi_nhan], [ngay_tao_don], [tinh_trang]) VALUES (N'001', N'Huy', 1, 10000, N'240', N'Huy', N'0765230162', N'240', CAST(N'2003-12-04' AS Date), 1)
+INSERT [dbo].[HoaDon] ([id_hd], [nguoi_thanh_toan], [so_luong_don], [tong_gia], [dia_chi_gui], [ten_nguoi_nhan], [sdt_nguoi_nhan], [dia_chi_nhan], [ngay_tao_don], [tinh_trang]) VALUES (N'002', N'Na', 1, 20000, N'250', N'Na', N'113', N'250', CAST(N'2020-12-02' AS Date), 1)
+INSERT [dbo].[HoaDon] ([id_hd], [nguoi_thanh_toan], [so_luong_don], [tong_gia], [dia_chi_gui], [ten_nguoi_nhan], [sdt_nguoi_nhan], [dia_chi_nhan], [ngay_tao_don], [tinh_trang]) VALUES (N'003', N'Huy', 1, 23000, N'240', N'Huy', N'0765230162', N'240', CAST(N'2003-12-04' AS Date), 0)
+INSERT [dbo].[HoaDon] ([id_hd], [nguoi_thanh_toan], [so_luong_don], [tong_gia], [dia_chi_gui], [ten_nguoi_nhan], [sdt_nguoi_nhan], [dia_chi_nhan], [ngay_tao_don], [tinh_trang]) VALUES (N'004', N'Huy', 1, 30000, N'240', N'Huy', N'0765230162', N'240', CAST(N'2022-12-04' AS Date), 2)
+GO
