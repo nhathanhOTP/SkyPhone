@@ -9,6 +9,8 @@ import com.nhathanh.model.NhanHang;
 import com.nhathanh.service.SessionService;
 import com.nhathanh.service.ShoppingCartInfor;
 import com.nhathanh.service.ShoppingCartService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,7 +87,13 @@ public class MainController {
 	// -----------------------------------------User
 	// URL--------------------------------------------
 	@GetMapping("/skyPhoneUser")
-	public String getLink1() {
+	public String getLink1(Model model, @RequestParam("p") Optional<Integer> p) {
+//		Optional<Integer> p = Optional.of(0);
+		Pageable pageable = PageRequest.of(p.orElse(0), 12);
+//		List<DienThoai> dt = dtDAO.findAll();
+		Page<DienThoai> page = dtDAO.listDienThoaiDisplay(false, pageable);
+//		model.addAttribute("item", dt);
+		model.addAttribute("page", page);
 		return "/pageUser/index";
 	}
 
