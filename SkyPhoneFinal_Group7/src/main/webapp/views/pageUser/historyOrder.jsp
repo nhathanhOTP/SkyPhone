@@ -82,15 +82,24 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<p class="text-dark">
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageUser/historyOrder.jsp
 										Chào <b class="font-weight-bold">${itemN.ten_nguoi_nhan} -
 											${itemN.sdt_nguoi_nhan}</b>
+=======
+										Chào <b class="font-weight-bold">${itemN.ten_nguoi_nhan}
+											- ${itemN.sdt_nguoi_nhan}</b>
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageUser/historyOrder.jsp
 									</p>
 								</div>
 								<div class="row sunRight col-lg-4">
 									<a href="" class="text-primary"><i class="fa fa-comments"
 										aria-hidden="true"></i> Phản hồi, góp ý</a>
 									<div class="space"></div>
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageUser/historyOrder.jsp
 									<a href="/SkyPhoneUser/logout" class="text-primary font-weight-bold">Thoát tài
+=======
+									<a href="" class="text-primary font-weight-bold">Thoát tài
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageUser/historyOrder.jsp
 										khoản</a>
 								</div>
 							</div>
@@ -98,7 +107,11 @@
 
 						<div class="card" style="width: 65rem;">
 							<!-- Page inclue -->
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageUser/historyOrder.jsp
 							<jsp:include page="${page}" />
+=======
+							<jsp:include page="/views/pageUser/history.jsp" />
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageUser/historyOrder.jsp
 							<!-- End page -->
 						</div>
 					</div>

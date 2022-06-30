@@ -1,11 +1,23 @@
 package com.nhathanh.controller;
 
 import com.nhathanh.dao.*;
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/java/com/nhathanh/controller/MainController.java
 import com.nhathanh.model.*;
+=======
+import com.nhathanh.model.DanhGia;
+import com.nhathanh.model.DienThoai;
+import com.nhathanh.model.HDChiTiet;
+import com.nhathanh.model.HoaDon;
+import com.nhathanh.model.NhanHang;
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/java/com/nhathanh/controller/MainController.java
 import com.nhathanh.service.SessionService;
 import com.nhathanh.service.ShoppingCartInfor;
 import com.nhathanh.service.ShoppingCartService;
 
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/java/com/nhathanh/controller/MainController.java
+=======
+
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/java/com/nhathanh/controller/MainController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +56,7 @@ public class MainController {
 	// -----------------------------------------User
 	// URL--------------------------------------------
 	@GetMapping("/skyPhoneUser")
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/java/com/nhathanh/controller/MainController.java
 	public String getLink1(Model model, @RequestParam("p") Optional<Integer> p, @RequestParam(name="KeySearch", defaultValue="Nothing_To_Search_Here") String keySearch) {
 		System.out.println("KeySearch is: "+keySearch);
 		Pageable pageable;
@@ -56,9 +69,65 @@ public class MainController {
 			pageable = PageRequest.of(p.orElse(0), 10);
 			Page<DienThoai> page = dtDAO.listDienThoaiDisplay(true, pageable);
 			model.addAttribute("page", page);
+=======
+	public String getLink1(Model model, @RequestParam("p") Optional<Integer> p) {
+//		Optional<Integer> p = Optional.of(0);
+		Pageable pageable = PageRequest.of(p.orElse(0), 12);
+//		List<DienThoai> dt = dtDAO.findAll();
+		Page<DienThoai> page = dtDAO.listDienThoaiDisplay(false, pageable);
+//		model.addAttribute("item", dt);
+		model.addAttribute("page", page);
+		return "/pageUser/index";
+	}
+
+	// Siri:Đổ dữ liệu chi tiết một sản phẩm khi chọn sản phẩm chi tiết
+	@GetMapping("/item/product/{id}")
+	public String getDetailProduct(Model model, @PathVariable("id") String id) {
+		DienThoai dt = dtDAO.findById(id).get();
+		// Dữ liệu null thì gọi trang error
+		if (dt.getId_dt().equals("") || dt.getId_dt() == null) {
+			return "/errorPage/error404";
+		} else {
+			List<DanhGia> danhGia = dgDAO.findAllDanhGiaWithDienThoai("%" + dt.getId_dt() + "%");
+			List<DienThoai> dungLuongVaMau = dtDAO.getDienThoaiByTen("%" + dt.getTen_dt() + "%");
+			// AddAttribute Sản phẩm chi tiết, màu và dung lượng
+			model.addAttribute("DanhGia", danhGia);
+			model.addAttribute("detailItem", dt);
+			model.addAttribute("dungLuongVaMau", dungLuongVaMau);
+			return "/pageUser/detailProduct";
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/java/com/nhathanh/controller/MainController.java
 		}
 		return "/pageUser/index";
 
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/java/com/nhathanh/controller/MainController.java
+=======
+	// Siri:Kiểm tra lịch sử đơn hàng
+	@GetMapping("/user/history")
+	public String checkHistoryOrder(Model model, @RequestParam("id") Optional<String> sdt_hd) {
+		String sdt = sdt_hd.orElse(ss.get("id"));
+//		HDChiTiet hdct= hdctDAO.findById(sdt).get();
+//		Dữ liệu null thì gọi trang error
+		if (sdt_hd.orElse(ss.get("id")).equals("") || sdt_hd.orElse(ss.get("id")) == null) {
+			return "/errorPage/error404";
+		} else {
+			List<HoaDon> HoaDon = hdDAO.getHoaDonBySDT(sdt);
+			List<HoaDon> HoaDonName = hdDAO.getHDbyName(sdt);
+			List<HDChiTiet> hdct = hdctDAO.getHDCTByid(sdt);
+//					AddAttribute lịch sử mua hàng
+			model.addAttribute("HDN", HoaDonName);
+			model.addAttribute("HD", HoaDon);
+			model.addAttribute("HDCT", hdct);
+			return "/pageUser/historyOrder";
+		}
+	}
+
+	// Siri:Thêm một sản phẩm vào giỏ hàng khi người dùng nhấn mua ngay
+	@GetMapping("/cart/add/{id}")
+	public String addItemToCart(Model model, @PathVariable("id") String id_dt) {
+		DienThoai dt = dtDAO.findById(id_dt).get();
+		scs.add(dt);
+		return "redirect:/item/product/" + id_dt;
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/java/com/nhathanh/controller/MainController.java
 	}
 
 	// -----------------------------------------Admin

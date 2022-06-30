@@ -130,7 +130,11 @@
 											<tbody>
 												<c:forEach var="item" items="${itemUnActive.content}">
 													<tr>
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/indexAdmin.jsp
 														<td><a href="/skyPhone/image/${item.id_dt}"><img
+=======
+														<td><a href="/dienthoai/edit/${item.id_dt}"><img
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/indexAdmin.jsp
 																src="/images/phone_images/${item.id_dt}/0.jpg"
 																alt=""></a></td>
 														<td>${item.ten_dt}</td>

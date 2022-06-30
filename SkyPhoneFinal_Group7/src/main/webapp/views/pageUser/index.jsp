@@ -119,6 +119,7 @@
 						</c:forEach>
 						<!--Kết thúc hiển thị sản phẩm -->
 					</div>
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageUser/index.jsp
 					<c:choose>
 						<c:when test="${keySearch!=1}">
 							<div class="mt-4 watch">
@@ -137,6 +138,15 @@
 							</div>
 						</c:when>
 					</c:choose>
+=======
+					
+					<div class="mt-4 watch ">
+						<a class="href_link" href="/skyPhoneUser?p=0">First</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.number-1}">Previous</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.number+1}">Next</a> 
+						<a class="href_link" href="/skyPhoneUser?p=${page.totalPages-1}">Last</a>
+					</div>
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageUser/index.jsp
 				</div>
 			</div>
 		</div>

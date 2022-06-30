@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.nhathanh.model.DienThoai;
 
 public interface DienThoaiDAO extends JpaRepository<DienThoai, String> {
+	
 	@Query(value = "Select * from DienThoai dt where dt.ten_dt like ?1", nativeQuery=true)
     public List<DienThoai> getDienThoaiByTen(String ten_dt);
 
@@ -20,6 +21,7 @@ public interface DienThoaiDAO extends JpaRepository<DienThoai, String> {
 
 	@Query(value = "Select o from DIENTHOAI o where o.hoat_dong = ?1")
 	public Page<DienThoai> listDienThoaiDisplay(boolean hoatDong, Pageable pageable);
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/java/com/nhathanh/dao/DienThoaiDAO.java
 	
 	@Query(value = "Select o from DIENTHOAI o where o.hoat_dong = ?1")
 	public List<DienThoai> listAllSkyPhoneUntive(boolean hoatDong);
@@ -29,4 +31,6 @@ public interface DienThoaiDAO extends JpaRepository<DienThoai, String> {
 
 	@Query(value = "Select * from DIENTHOAI o where o.hoat_dong = ?2 and o.ten_dt like ?1",nativeQuery = true)
 	public Page<DienThoai> listDienThoaiDisplayByKeySearch(String keySearch, boolean hoat_dong, Pageable page);
+=======
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/java/com/nhathanh/dao/DienThoaiDAO.java
 }

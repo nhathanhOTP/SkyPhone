@@ -49,9 +49,13 @@
 								<div class="card-body">
 									<h4 class="card-title">Sản phẩm đang cập nhật ảnh</h4>
 									<hr>
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 									<form enctype='multipart/form-data'
 										action="/skyPhone/image/add/${dienThoai.id_dt}"
 										class="form-sample">
+=======
+									<form enctype='multipart/form-data' action="" class="form-sample">
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 										<div class="row">
 											<div class="text-left col-lg-7">${dienThoai.ten_dt!=""?dienThoai.ten_dt:'Vui lòng chọn sản phẩm cập nhật'}/${dienThoai.mau!=""?dienThoai.mau:''}/${dienThoai.dung_luong!=""?dienThoai.dung_luong:''}</div>
 											<div class="text-left col-lg-5">ID Sản phẩm:
@@ -62,9 +66,14 @@
 												<input type="file" id="file-input1" name="anhChinh"
 													accept="image/gif, image/jpeg, image/png, image/jpg"
 													onchange="readURL(this);"> <label for="file-input1"
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 													class="file-label1 "> <img id="blah1"
 													src="${mainImage}" alt="" name="mainImage"
 													class="mainImg img-fluid" width="530" height="510" />
+=======
+													class="file-label1 "> <img id="blah1" src="${mainImage != ""? mainImage:''}"
+													alt="" name="mainImage" class="mainImg img-fluid" width="530" height="510" />
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 												</label> <br> <span class="text-center"> <span
 													id="file-name1"></span>
 												</span>
@@ -76,8 +85,13 @@
 														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL1(this);"> <label
 														for="file-input2" class="file-label2"> <img
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 														id="blah2" src="${image1}" name="image1" alt=""
 														width="130" height="130" style="outline: none;" />
+=======
+														id="blah2" src="${image1 != ""? image1:''}" name="image1" alt="" width="130" height="130"
+														style="outline: none;" />
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 													</label> <br> <span id="file-name2" style="font-size: 8px;"></span>
 												</div>
 												<br> <br>
@@ -86,8 +100,13 @@
 														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL2(this);"> <label
 														for="file-input3" class="file-label3"> <img
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 														id="blah3" src="${image2}" name="image2" alt=""
 														width="130" height="130" style="outline: none;" />
+=======
+														id="blah3" src="${image2 != ""? image2:''}" name="image2" alt="" width="130" height="130"
+														style="outline: none;" />
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 													</label> <br> <span id="file-name3" style="font-size: 8px;"></span>
 												</div>
 												<br> <br>
@@ -96,14 +115,23 @@
 														accept="image/gif, image/jpeg, image/png, image/jpg"
 														onchange="readURL3(this);"> <label
 														for="file-input4" class="file-label4"> <img
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 														id="blah4" src="${image3}" name="image3" alt=""
 														width="130" height="130" style="outline: none;" />
+=======
+														id="blah4" src="${image3 != ""? image3:''}" name="image3" alt="" width="130" height="130"
+														style="outline: none;" />
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 													</label> <br> <span id="file-name4" style="font-size: 8px;"></span>
 												</div>
 											</div>
 										</div>
 										<div class="canGiua mt-5">
+<<<<<<< HEAD:SkyPhoneFinal_Group7/src/main/webapp/views/pageAdmin/updateImage.jsp
 											<button class="updateImage" type="submit" formmethod="POST"
+=======
+											<button class="updateImage" formmethod="POST" formaction="/skyPhone/image/add/${dienThoai.id_dt}"
+>>>>>>> b84b61f0bb5fcddc3ccff7762ecf5865deda4d69:Assignment_GD1/src/main/webapp/views/pageAdmin/updateImage.jsp
 												style="background: linear-gradient(180deg, #d18d8d, #ff172e);">Cập
 												nhật ảnh vào sản phẩm</button>
 										</div>
